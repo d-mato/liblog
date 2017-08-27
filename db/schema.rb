@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 20170827044141) do
 
   create_table "libraries", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -21,10 +21,10 @@ ActiveRecord::Schema.define(version: 20170827044141) do
   create_table "loans", force: :cascade do |t|
     t.integer "user_id"
     t.integer "library_id"
-    t.date "started_at"
-    t.date "ended_at"
+    t.date "started_at", null: false
+    t.date "ended_at", null: false
     t.string "place_name"
-    t.string "book_title"
+    t.string "book_title", null: false
     t.string "isbn"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
