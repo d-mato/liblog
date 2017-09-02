@@ -51,6 +51,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 ########################################
 
 gem 'devise'
+gem 'faraday-cookie_jar'
+gem 'faraday_middleware'
 gem 'pry-rails'
 gem 'slim-rails'
 

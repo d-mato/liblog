@@ -23,6 +23,8 @@ module Liblog
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
+    config.time_zone = 'Asia/Tokyo'
+    config.paths.add 'lib', eager_load: true
     # -- all .rb files in that directory are automatically loaded.
 
     # Don't generate system test files.
