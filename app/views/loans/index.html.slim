@@ -3,6 +3,7 @@ table
     th タイトル
     th 貸出日
     th 返却日
+    th 図書館
     th 貸出場所
 
   - @loans.each do |loan|
@@ -10,5 +11,6 @@ table
       td = loan.book_title
       td = loan.started_at
       td = loan.ended_at
+      td = loan.library.name
       td = loan.place_name
 

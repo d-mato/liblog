@@ -18,14 +18,13 @@ module Crawler
       res = @client.get '/login'
       action = Nokogiri.parse(res.body.toutf8).at('//form')[:action]
       res = @client.post action, params
-
-      return true if res.body.toutf8.include? 'ログインしています'
-
-      doc = Nokogiri.parse(res.body.toutf8)
-      error = doc.at('//span[@class="feedbackPanelERROR"]').text
-      @errors << error if error.present?
-      false
+      _login_result(
+        res.body.toutf8,
+        ok: ->(doc) { doc.text.include? "#{@library_user.sign_in_id}さんのマイライブラリ" },
+        error: ->(doc) { doc.at('//span[@class="feedbackPanelERROR"]').text.strip }
+      )
     rescue => e
+      p e
       @errors << e.message
       false
     end
