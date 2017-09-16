@@ -2,13 +2,7 @@ require 'kconv'
 
 module Crawler
   class ChuoCrawler < AbstractCrawler
-    private
-
-    def _default_url
-      'https://www.library.city.chuo.tokyo.jp'
-    end
-
-    def _login
+    def login
       params = {
         textUserId: @library_user.sign_in_id,
         textPassword: @library_user.password,
@@ -27,6 +21,12 @@ module Crawler
       p e
       @errors << e.message
       false
+    end
+
+    private
+
+    def _default_url
+      'https://www.library.city.chuo.tokyo.jp'
     end
 
     def _fetch_loans

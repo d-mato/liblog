@@ -12,7 +12,7 @@ module Crawler
     end
 
     def exec
-      unless _login
+      unless login
         raise CannotLogInError
       end
 
@@ -22,14 +22,14 @@ module Crawler
       end
     end
 
-    private
-
-    def _default_url
+    # @return [boolean]
+    def login
       raise NotImplementedError
     end
 
-    # @return [boolean]
-    def _login
+    private
+
+    def _default_url
       raise NotImplementedError
     end
 

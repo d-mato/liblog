@@ -1,0 +1,9 @@
+= form_for @library_user do |f|
+  - if @library_user.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@library_user.errors.count, "error")} prohibited this library_user from being saved:"
+      ul
+        - @library_user.errors.full_messages.each do |message|
+          li = message
+
+  .actions = f.submit

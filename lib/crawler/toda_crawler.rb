@@ -2,13 +2,7 @@ require 'kconv'
 
 module Crawler
   class TodaCrawler < AbstractCrawler
-    private
-
-    def _default_url
-      'https://library.toda.saitama.jp'
-    end
-
-    def _login
+    def login
       params = {
         usercardno: @library_user.sign_in_id,
         userpasswd: @library_user.password,
@@ -29,6 +23,12 @@ module Crawler
       p e
       @errors << e.message
       false
+    end
+
+    private
+
+    def _default_url
+      'https://library.toda.saitama.jp'
     end
 
     def _fetch_loans
