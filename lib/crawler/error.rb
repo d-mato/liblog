@@ -1,4 +1,3 @@
 module Crawler
-  class CannotLogInError < StandardError
-  end
+  class CannotLogInError < StandardError; end
 end

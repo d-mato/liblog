@@ -1,5 +1,3 @@
-require 'kconv'
-
 module Crawler
   class ChuoCrawler < AbstractCrawler
     def login

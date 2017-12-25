@@ -1,5 +1,3 @@
-require 'kconv'
-
 module Crawler
   class TodaCrawler < AbstractCrawler
     def login

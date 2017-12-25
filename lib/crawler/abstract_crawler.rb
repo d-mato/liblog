@@ -1,3 +1,5 @@
+require 'kconv'
+
 module Crawler
   class AbstractCrawler
     def initialize(library_user)
@@ -48,8 +50,5 @@ module Crawler
     def _fetch_loans
       raise NotImplementedError
     end
-  end
-
-  class CannotLogInError < StandardError
   end
 end
