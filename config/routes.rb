@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   resources :loans
   resources :library_users
 
-  root 'application#index'
+  get '/' => redirect('/loans')
 end

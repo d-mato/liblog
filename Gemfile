@@ -50,6 +50,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 ########################################
 
+gem 'bootstrap'
 gem 'devise'
 gem 'faraday-cookie_jar'
 gem 'faraday_middleware'

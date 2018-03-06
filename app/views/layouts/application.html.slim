@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    meta content=('text/html; charset=UTF-8') http-equiv='Content-Type'
+    title Liblog
+    = csrf_meta_tags
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light
+      a.navbar-brand href="#"  Liblog
+      button.navbar-toggler aria-controls="navbarSupportedContent" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarSupportedContent" data-toggle="collapse" type="button"
+        span.navbar-toggler-icon
+
+      #navbarSupportedContent.collapse.navbar-collapse
+        ul.navbar-nav.mr-auto
+          li.nav-item class=('active' if controller_name == 'loans')
+            = link_to 'Loans', loans_path, class: 'nav-link'
+          li.nav-item class=('active' if controller_name == 'library_users')
+            = link_to 'Account', library_users_path, class: 'nav-link'
+
+        form.form-inline.my-2.my-lg-0
+          input.form-control.mr-sm-2 aria-label="Search" placeholder="Search" type="search" /
+          button.btn.btn-outline-success.my-2.my-sm-0 type="submit"  Search
+
+    .container-fluid
+      = yield

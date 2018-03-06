@@ -1,17 +1,18 @@
-h1 Listing library_users
+h2 Listing library_users
 
-table
+table.table
   thead
     tr
       th 図書館
       th ログインID
       th パスワード
+      th
 
   tbody
     - @library_users.each do |library_user|
       tr
         td = library_user.library.name
         td = library_user.sign_in_id
-        td = '******'
+        td = library_user.password
         td = link_to '連携を解除する', '#'
 
