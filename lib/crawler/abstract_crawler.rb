@@ -19,8 +19,12 @@ module Crawler
       end
 
       loans = _fetch_loans
+      now = Time.current
       ActiveRecord::Base.transaction do
-        loans.each(&:save!)
+        loans.each do |loan|
+          loan.last_fetched_at = now
+          loan.save!
+        end
       end
     end
 

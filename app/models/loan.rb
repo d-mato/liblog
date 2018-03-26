@@ -8,4 +8,8 @@ class Loan < ApplicationRecord
 
   # TODO
   # scope :lending, -> { where()}
+
+  def arrears?
+    last_fetched_at? && last_fetched_at > ended_at
+  end
 end
