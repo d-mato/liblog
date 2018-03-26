@@ -2,16 +2,16 @@ table.table.table-sm
   tr
     th タイトル
     th 貸出日
-    th 返却日
+    th 返却期限
     th 図書館
     th 貸出場所
     th 最終情報取得
 
   - @loans.each do |loan|
-    tr
+    tr[class=('text-muted' if loan.returned?)]
       td = loan.book_title
       td = simple_datetime(loan.started_at)
-      td[class=(loan.arrears? ? 'bg-danger text-white' : '')] = simple_datetime(loan.ended_at)
+      td[class=('bg-danger text-white' if loan.arrears?)] = simple_datetime(loan.ended_at)
       td = loan.library.name
       td = loan.place_name
       td = simple_datetime(loan.last_fetched_at)

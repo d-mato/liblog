@@ -18,12 +18,14 @@ module Crawler
         raise CannotLogInError
       end
 
+      # 一旦既存の貸出を全て返却済みにする
+      @library_user.loans.update_all(returned: true)
+
       loans = _fetch_loans
       now = Time.current
       ActiveRecord::Base.transaction do
         loans.each do |loan|
-          loan.last_fetched_at = now
-          loan.save!
+          loan.update!(last_fetched_at: now, returned: false)
         end
       end
     end
