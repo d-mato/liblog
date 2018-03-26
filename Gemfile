@@ -55,6 +55,7 @@ gem 'devise'
 gem 'faraday-cookie_jar'
 gem 'faraday_middleware'
 gem 'pry-rails'
+gem 'ridgepole'
 gem 'slim-rails'
 
 group :development, :test do
