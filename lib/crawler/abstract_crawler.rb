@@ -23,7 +23,8 @@ module Crawler
       now = Time.current
       ActiveRecord::Base.transaction do
         loans.each do |loan|
-          loan.update!(last_fetched_at: now, returned: false)
+          loan.attributes = { last_fetched_at: now, returned: false }
+          loan.save!
         end
       end
     end

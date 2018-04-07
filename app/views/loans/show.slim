@@ -5,6 +5,12 @@
       th タイトル
       td = @loan.book_title
     tr
+      th 著者
+      td = @loan.author
+    tr
+      th ISBN
+      td = @loan.isbn
+    tr
       th 貸出日
       td = simple_date(@loan.started_at)
     tr

@@ -30,12 +30,21 @@ module Crawler
       doc.xpath('//div[@class="infotable"]').map do |infotable|
         tbody = infotable.xpath('table[2]/tbody')
         date_format = '%Y年%m月%d日'
-        @library_user.loans.find_or_initialize_by(
+        loan = @library_user.loans.find_or_initialize_by(
           started_at: Date.strptime(tbody.xpath('tr[2]/td').text.strip, date_format),
-          book_title: infotable.xpath('h3/a').text.strip,
-          place_name: tbody.xpath('tr[1]/td').text.strip,
-          ended_at: Date.strptime(tbody.xpath('tr[4]/td').text.strip, date_format)
+          book_title: infotable.xpath('h3/a').text.strip
         )
+        loan.place_name = tbody.xpath('tr[1]/td').text.strip
+        loan.ended_at = Date.strptime(tbody.xpath('tr[4]/td').text.strip, date_format)
+
+        detail_url = infotable.at('h3/a')[:href]
+        doc_detail = Nokogiri.parse(@client.get(detail_url).body.toutf8)
+        sleep 3 # getしてから3秒待つ
+
+        loan.author = doc_detail.xpath('//*[@id="first"]/div/table[2]/tr[2]/td').text.strip
+        loan.isbn = doc_detail.xpath('//*[@id="first"]/div/table[2]/tr[8]/td').text.strip
+
+        loan
       end
     end
   end

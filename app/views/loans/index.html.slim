@@ -2,6 +2,7 @@
   table.table.table-sm
     tr
       th タイトル
+      th 著者
       th 貸出日
       th 返却期限
       th 図書館
@@ -11,6 +12,7 @@
     - @loans.each do |loan|
       tr[class=('text-muted' if loan.returned?)]
         td = link_to loan.book_title, loan
+        td = loan.author.truncate(20)
         td = simple_date(loan.started_at)
         td[class=('bg-danger text-white' if loan.arrears?)] = simple_date(loan.ended_at)
         td = loan.library.name

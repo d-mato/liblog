@@ -33,12 +33,14 @@ module Crawler
       doc.xpath('//table[2]/tr').each do |tr|
         next if tr.xpath('td[8]').blank?
 
-        loans << @library_user.loans.find_or_initialize_by(
+        loan = @library_user.loans.find_or_initialize_by(
           started_at: tr.xpath('td[7]').text.strip,
-          book_title: tr.xpath('td[3]').text.strip,
-          place_name: tr.xpath('td[6]').text.strip,
-          ended_at: tr.xpath('td[8]').text.strip
+          book_title: tr.xpath('td[3]').text.strip
         )
+        loan.place_name = tr.xpath('td[6]').text.strip
+        loan.ended_at = tr.xpath('td[8]').text.strip
+
+        loans << loan
       end
       loans
     end
