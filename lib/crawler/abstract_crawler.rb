@@ -14,9 +14,7 @@ module Crawler
     end
 
     def exec
-      unless login
-        raise CannotLogInError
-      end
+      login
 
       # 一旦既存の貸出を全て返却済みにする
       @library_user.loans.update_all(returned: true)
@@ -30,7 +28,6 @@ module Crawler
       end
     end
 
-    # @return [boolean]
     def login
       raise NotImplementedError
     end
@@ -39,17 +36,6 @@ module Crawler
 
     def _default_url
       raise NotImplementedError
-    end
-
-    def _login_result(body, ok:, error:)
-      raise ArgumentError unless ok.is_a? Proc
-      doc = Nokogiri.parse(body)
-      return true if ok.call(doc)
-      if error.is_a? Proc
-        err = error.call(doc)
-        @errors << err if err.present?
-      end
-      false
     end
 
     # @return [Array[Loan]]

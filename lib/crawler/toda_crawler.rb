@@ -12,15 +12,12 @@ module Crawler
       }
       @client.post '/opw/OPW/OPWUSERLOGIN.CSP', params
       res = @client.post '/opw/OPW/OPWUSERINFO.CSP', params
-      _login_result(
-        res.body.toutf8,
-        ok: ->(doc) { doc.text.include? "利用券番号:#{@library_user.sign_in_id}" },
-        error: ->(doc) { doc.at('//dl/dd/font/strong').text.strip }
-      )
-    rescue => e
-      p e
-      @errors << e.message
-      false
+      doc = Nokogiri.parse(res.body.toutf8)
+
+      return true if doc.text.include? "利用券番号:#{@library_user.sign_in_id}"
+
+      error = doc.at('//dl/dd/font/strong')&.text&.strip
+      raise CannotLogInError, error
     end
 
     private
@@ -36,13 +33,12 @@ module Crawler
       doc.xpath('//table[2]/tr').each do |tr|
         next if tr.xpath('td[8]').blank?
 
-        loan = @library_user.loans.find_or_initialize_by(
+        loans << @library_user.loans.find_or_initialize_by(
           started_at: tr.xpath('td[7]').text.strip,
           book_title: tr.xpath('td[3]').text.strip,
+          place_name: tr.xpath('td[6]').text.strip,
+          ended_at: tr.xpath('td[8]').text.strip
         )
-        loan.place_name = tr.xpath('td[6]').text.strip
-        loan.ended_at = tr.xpath('td[8]').text.strip
-        loans << loan
       end
       loans
     end
