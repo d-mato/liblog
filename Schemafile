@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-create_table :book_reviews do |t|
+create_table :book_reviews, force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC' do |t|
   t.integer :loan_id, null: false
   t.integer :star
   t.text :comment, null: false
@@ -9,14 +9,14 @@ create_table :book_reviews do |t|
   t.index :loan_id
 end
 
-create_table :libraries, force: :cascade do |t|
+create_table :libraries, force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC' do |t|
   t.string :name, null: false
   t.datetime :created_at, null: false
   t.datetime :updated_at, null: false
   t.string :crawler
 end
 
-create_table :library_users, force: :cascade do |t|
+create_table :library_users, force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC' do |t|
   t.integer :user_id, null: false
   t.integer :library_id, null: false
   t.string :sign_in_id, null: false
@@ -29,7 +29,7 @@ create_table :library_users, force: :cascade do |t|
   t.index [:user_id], name: :index_library_users_on_user_id
 end
 
-create_table :loans, force: :cascade do |t|
+create_table :loans, force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC' do |t|
   t.integer :user_id, null: false
   t.integer :library_id, null: false
   t.date :started_at, null: false
@@ -45,7 +45,7 @@ create_table :loans, force: :cascade do |t|
   t.index [:user_id], name: :index_loans_on_user_id
 end
 
-create_table :users, force: :cascade do |t|
+create_table :users, force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC' do |t|
   t.string :email, default: "", null: false
   t.string :encrypted_password, default: "", null: false
   t.string :reset_password_token
