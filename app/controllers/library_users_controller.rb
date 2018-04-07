@@ -1,45 +1,24 @@
 class LibraryUsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_library_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_library_user, only: %i(edit update destroy)
 
-  # GET /library_users
-  # GET /library_users.json
   def index
     @library_users = current_user.library_users
   end
 
-  # GET /library_users/1
-  # GET /library_users/1.json
-  def show
-  end
-
-  # GET /library_users/new
   def new
     @library_user = LibraryUser.new
   end
 
-  # GET /library_users/1/edit
-  def edit
-  end
-
-  # POST /library_users
-  # POST /library_users.json
   def create
-    @library_user = LibraryUser.new(library_user_params)
-
-    respond_to do |format|
-      if @library_user.save
-        format.html { redirect_to @library_user, notice: 'Library user was successfully created.' }
-        format.json { render :show, status: :created, location: @library_user }
-      else
-        format.html { render :new }
-        format.json { render json: @library_user.errors, status: :unprocessable_entity }
-      end
+    @library_user = current_user.library_users.new(library_user_params)
+    if @library_user.save
+      redirect_to library_users_path, notice: '連携設定を追加しました'
+    else
+      render :new
     end
   end
 
-  # PATCH/PUT /library_users/1
-  # PATCH/PUT /library_users/1.json
   def update
     respond_to do |format|
       if @library_user.update(library_user_params)
@@ -52,24 +31,18 @@ class LibraryUsersController < ApplicationController
     end
   end
 
-  # DELETE /library_users/1
-  # DELETE /library_users/1.json
   def destroy
-    @library_user.destroy
-    respond_to do |format|
-      format.html { redirect_to library_users_url, notice: 'Library user was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    @library_user.destroy!
+    redirect_to library_users_url, notice: '連携設定を解除しました'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_library_user
-      @library_user = LibraryUser.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def library_user_params
-      params.fetch(:library_user, {})
-    end
+  def set_library_user
+    @library_user = current_user.library_users.find(params[:id])
+  end
+
+  def library_user_params
+    params.require(:library_user).permit(%i(library_id sign_in_id password))
+  end
 end
