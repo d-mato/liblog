@@ -1,5 +1,13 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
+
+create_table :book_reviews do |t|
+  t.integer :loan_id, null: false
+  t.text :comment, null: false
+  t.timestamps null: false
+  t.index :loan_id
+end
+
 create_table :libraries, force: :cascade do |t|
   t.string :name, null: false
   t.datetime :created_at, null: false
