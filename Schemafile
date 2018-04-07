@@ -25,13 +25,12 @@ create_table :library_users, force: :cascade, options: 'ENGINE=InnoDB DEFAULT CH
   t.datetime :last_sign_in_at
   t.datetime :created_at, null: false
   t.datetime :updated_at, null: false
-  t.index [:library_id], name: :index_library_users_on_library_id
-  t.index [:user_id], name: :index_library_users_on_user_id
+  t.index [:user_id, :library_id], unique: true
 end
 
 create_table :loans, force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC' do |t|
-  t.integer :user_id, null: false
-  t.integer :library_id, null: false
+  t.integer :user_id, null: false, default: 0
+  t.integer :library_id, null: false, default: 0
   t.date :started_at, null: false
   t.date :ended_at, null: false
   t.string :place_name, null: false, default: ''
@@ -41,8 +40,6 @@ create_table :loans, force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=ut
   t.boolean :returned, null: false, default: false
   t.datetime :created_at, null: false
   t.datetime :updated_at, null: false
-  t.index [:library_id], name: :index_loans_on_library_id
-  t.index [:user_id], name: :index_loans_on_user_id
 end
 
 create_table :users, force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC' do |t|
@@ -58,6 +55,6 @@ create_table :users, force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=ut
   t.string :last_sign_in_ip
   t.datetime :created_at, null: false
   t.datetime :updated_at, null: false
-  t.index [:email], name: :index_users_on_email, unique: true
-  t.index [:reset_password_token], name: :index_users_on_reset_password_token, unique: true
+  t.index [:email]
+  t.index [:reset_password_token], unique: true
 end
