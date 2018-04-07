@@ -1,0 +1,38 @@
+.py-4
+  h3 貸出情報
+  table.table
+    tr
+      th タイトル
+      td = @loan.book_title
+    tr
+      th 貸出日
+      td = simple_date(@loan.started_at)
+    tr
+      th 返却期限
+      td[class=('bg-danger text-white' if @loan.arrears?)] = simple_date(@loan.ended_at)
+    tr
+      th 図書館
+      td = @loan.library.name
+    tr
+      th 貸出場所
+      td = @loan.place_name
+    tr
+      th 最終情報取得
+      td = simple_date(@loan.last_fetched_at)
+
+.py-4
+  h3 レビュー
+  - if @loan.book_review
+    table.table
+      tr
+        th 評価
+        td = @loan.book_review.star
+      tr
+        th コメント
+        td = simple_format(@loan.book_review.comment)
+
+  - else
+    p なし
+
+  a data-toggle="modal" href="#bookReviewform" レビューを更新
+  = render 'book_review_form_modal'

@@ -3,6 +3,7 @@
 
 create_table :book_reviews do |t|
   t.integer :loan_id, null: false
+  t.integer :star
   t.text :comment, null: false
   t.timestamps null: false
   t.index :loan_id

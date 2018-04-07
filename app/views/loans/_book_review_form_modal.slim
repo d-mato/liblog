@@ -1,0 +1,27 @@
+javascript:
+    var autoResize = function (e) {
+        var height = e.target.scrollHeight + 'px'
+        $(e.target).css('height', height)
+    }
+    $(document).ready(function () {
+        $('textarea').on('focus input propertychange', autoResize)
+    })
+
+.modal#bookReviewform role='dialog' tabindex='-1'
+  .modal-dialog role='document'
+    .modal-content
+      .modal-body
+        = form_with model: (@loan.book_review || BookReview.new), url: loan_book_review_path(@loan) do |f|
+          .form-group
+            = f.label :comment
+            = f.text_area :comment, class: 'form-control'
+          .form-group
+            = f.label :star
+            div
+              - (1..5).each do |n|
+                .form-check.form-check-inline
+                  = f.radio_button :star, n, class: 'form-check-input'
+
+          .d-flex.justify-content-end
+            = f.submit '更新', class: 'btn btn-sm btn-primary'
+            button.btn.btn-sm.btn-secondary.ml-2 data-dismiss='modal' type='button'  閉じる
