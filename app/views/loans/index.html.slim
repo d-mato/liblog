@@ -1,6 +1,7 @@
 .py-4
   table.table.table-sm
     tr
+      th レビュー
       th タイトル
       th 著者
       th 貸出日
@@ -11,6 +12,7 @@
 
     - @loans.each do |loan|
       tr[class=('text-muted' if loan.returned?)]
+        td = 'あり' if loan.book_review
         td = link_to loan.book_title, loan
         td = loan.author.truncate(20)
         td = simple_date(loan.started_at)
