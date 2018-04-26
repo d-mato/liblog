@@ -13,6 +13,6 @@ class Loan < ApplicationRecord
 
   # 延滞しているか
   def arrears?
-    last_fetched_at? && last_fetched_at > ended_at
+    !returned? && last_fetched_at? && last_fetched_at > ended_at
   end
 end
