@@ -1,16 +1,9 @@
-require 'kconv'
-
 module Crawler
   class AbstractCrawler
     def initialize(library_user)
       @errors = []
       @library_user = library_user
-      @client = Faraday.new _default_url do |f|
-        f.use FaradayMiddleware::FollowRedirects
-        f.use :cookie_jar
-        f.request :url_encoded
-        f.adapter Faraday.default_adapter
-      end
+      @client = Mechanize.new
     end
 
     def exec
@@ -45,4 +38,6 @@ module Crawler
       raise NotImplementedError
     end
   end
+
+  class CannotLogInError < StandardError; end
 end
