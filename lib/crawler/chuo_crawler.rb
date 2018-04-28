@@ -1,13 +1,11 @@
 module Crawler
   class ChuoCrawler < AbstractCrawler
     def login
-      @client.get 'https://www.library.city.chuo.tokyo.jp/login'
-      form = @client.page.form_with(id: 'inputForm49')
+      client.get 'https://www.library.city.chuo.tokyo.jp/login'
+      form = client.page.form_with(id: 'inputForm49')
       form.field_with!(name: 'textUserId').value = @library_user.sign_in_id
       form.field_with!(name: 'textPassword').value = @library_user.password
-      @client.click form.button_with!(value: '入力終了')
-
-      doc = @client.page.parser
+      client.click form.button_with!(value: '入力終了')
 
       return true if doc.text.include? "#{@library_user.sign_in_id}さんのマイライブラリ"
 
@@ -18,8 +16,7 @@ module Crawler
     private
 
     def _fetch_loans
-      @client.get 'https://www.library.city.chuo.tokyo.jp/rentallist'
-      doc = @client.page.parser
+      client.get 'https://www.library.city.chuo.tokyo.jp/rentallist'
       doc.xpath('//div[@class="infotable"]').map do |infotable|
         tbody = infotable.xpath('table[2]/tbody')
         date_format = '%Y年%m月%d日'
@@ -31,10 +28,10 @@ module Crawler
         loan.ended_at = Date.strptime(tbody.xpath('tr[4]/td').text.strip, date_format)
 
         detail_url = infotable.at('h3/a')[:href]
-        @client.get(detail_url)
+        client.get(detail_url)
         sleep 3 # getしてから3秒待つ
 
-        @client.page.parser.css('tr').each do |tr|
+        client.page.parser.css('tr').each do |tr|
           case tr.at('td')&.text
           when '著者'
             loan.author = tr.at('td[2]').text.strip

@@ -3,7 +3,6 @@ module Crawler
     def initialize(library_user)
       @errors = []
       @library_user = library_user
-      @client = Mechanize.new
     end
 
     def exec
@@ -29,13 +28,17 @@ module Crawler
 
     private
 
-    def _default_url
-      raise NotImplementedError
-    end
-
     # @return [Array[Loan]]
     def _fetch_loans
       raise NotImplementedError
+    end
+
+    def client
+      @client ||= Mechanize.new
+    end
+
+    def doc
+      client.page.parser
     end
   end
 

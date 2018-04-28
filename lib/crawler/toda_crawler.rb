@@ -1,16 +1,14 @@
 module Crawler
   class TodaCrawler < AbstractCrawler
     def login
-      @client.get 'https://library.toda.saitama.jp/'
-      form = @client.page.form_with(name: 'usercheck')
+      client.get 'https://library.toda.saitama.jp/'
+      form = client.page.form_with(name: 'usercheck')
       form.field_with!(name: 'usercardno').value = @library_user.sign_in_id
       form.field_with!(name: 'userpasswd').value = @library_user.password
-      @client.click form.button_with!(class: 'btnLogin')
+      client.click form.button_with!(class: 'btnLogin')
 
       # JavaScriptが無効ですと言われるが、一覧ページには入れる
-      @client.get 'https://library.toda.saitama.jp/opw/OPW/OPWUSERINFO.CSP'
-
-      doc = @client.page.parser
+      client.get 'https://library.toda.saitama.jp/opw/OPW/OPWUSERINFO.CSP'
 
       return true if doc.text.include? "利用券番号:#{@library_user.sign_in_id}"
 
@@ -22,8 +20,7 @@ module Crawler
 
     def _fetch_loans
       loans = []
-      @client.get 'https://library.toda.saitama.jp/opw/OPW/OPWUSERINFO.CSP'
-      doc = @client.page.parser
+      client.get 'https://library.toda.saitama.jp/opw/OPW/OPWUSERINFO.CSP'
       doc.xpath('//table[2]/tr').each do |tr|
         next if tr.xpath('td[8]').blank?
 
