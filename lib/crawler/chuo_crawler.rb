@@ -32,11 +32,16 @@ module Crawler
 
         detail_url = infotable.at('h3/a')[:href]
         @client.get(detail_url)
-        doc_detail = @client.page.parser
         sleep 3 # getしてから3秒待つ
 
-        loan.author = doc_detail.xpath('//*[@id="first"]/div/table[2]/tr[2]/td').text.strip
-        loan.isbn = doc_detail.xpath('//*[@id="first"]/div/table[2]/tr[8]/td').text.strip
+        @client.page.parser.css('tr').each do |tr|
+          case tr.at('td')&.text
+          when '著者'
+            loan.author = tr.at('td[2]').text.strip
+          when 'ISBN'
+            loan.isbn = tr.at('td[2]').text.strip
+          end
+        end
 
         loan
       end

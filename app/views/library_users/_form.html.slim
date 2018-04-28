@@ -8,7 +8,7 @@
             li = message
 
     .form-group
-      = f.collection_select :library_id, Library.where(name: '中央区立図書館'), :id, :name, {}, class: 'form-control'
+      = f.collection_select :library_id, Library.all, :id, :name, {}, class: 'form-control'
 
     .form-group
       = f.label :sign_in_id
