@@ -1,5 +1,5 @@
 .py-4
-  table.table.table-sm
+  table.table.table-sm.d-none.d-md-table
     tr
       th レビュー
       th タイトル
@@ -20,3 +20,14 @@
         td = loan.library.name
         td = loan.place_name
         td = simple_date(loan.last_fetched_at)
+
+  .list-group.d-md-none
+    - @loans.each do |loan|
+      = link_to loan, class: 'list-group-item', style: loan.returned? ? '' : 'background: aliceblue;' do
+        div = loan.book_title
+        .text-right.small
+          - if loan.returned?
+            .badge.badge-secondary 返却済
+          - else
+            .badge.badge-info 返却日 #{simple_date(loan.ended_at)}
+          .d-inline.ml-1.text-muted.label = loan.library.name
