@@ -26,19 +26,15 @@
       th 最終情報取得
       td = simple_date(@loan.last_fetched_at)
 
-.py-4
-  h3 レビュー
-  - if @loan.book_review
-    table.table
-      tr
-        th 評価
-        td = @loan.book_review.star
-      tr
-        th コメント
-        td = simple_format(@loan.book_review.comment)
+.py-2
+  .card
+    .card-body
+      h5.card-title レビュー
+      - if @loan.book_review
+        p.card-text
+          = '★ ' * @loan.book_review.star.to_i
+        p.card-text
+          = simple_format(@loan.book_review.comment)
 
-  - else
-    p なし
-
-  a data-toggle="modal" href="#bookReviewform" レビューを更新
+      a data-toggle="modal" href="#bookReviewform" レビューを更新
   = render 'book_review_form_modal', loan: @loan
