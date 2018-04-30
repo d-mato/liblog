@@ -32,11 +32,11 @@ module Crawler
         sleep 3 # getしてから3秒待つ
 
         client.page.parser.css('tr').each do |tr|
-          case tr.at('td')&.text
+          case tr.at('th')&.text
           when '著者'
-            loan.author = tr.at('td[2]').text.strip
-          when 'ISBN'
-            loan.isbn = tr.at('td[2]').text.strip
+            loan.author = tr.at('td').text.strip
+          when 'ＩＳＢＮ'
+            loan.isbn = tr.at('td').text.strip
           end
         end
 
