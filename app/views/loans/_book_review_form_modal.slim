@@ -8,20 +8,20 @@ javascript:
     })
 
 .modal#bookReviewform role='dialog' tabindex='-1'
-  .modal-dialog role='document'
+  .modal-dialog role='document' style='max-width: 55rem;'
     .modal-content
       .modal-body
         = form_with model: (loan.book_review || BookReview.new), url: loan_book_review_path(loan) do |f|
           .form-group
             = f.label :comment
             = f.text_area :comment, class: 'form-control'
-          .form-group
-            = f.label :star
-            div
-              - (1..5).each do |n|
-                .form-check.form-check-inline
-                  = f.radio_button :star, n, class: 'form-check-input'
+          .d-inline
+            .form-group.d-inline
+              = f.label :star
+              .d-inline-block.ml-2
+                = f.select :star, %w(1 2 3 4 5), { include_blank: true }, class: 'form-control d-inline-block', style: 'width: 5rem;'
 
-          .d-flex.justify-content-end
-            = f.submit '更新', class: 'btn btn-sm btn-primary'
-            button.btn.btn-sm.btn-secondary.ml-2 data-dismiss='modal' type='button'  閉じる
+            .d-inline-block.ml-2
+              = f.submit '更新', class: 'btn btn-sm btn-primary'
+            .d-inline-block.ml-2
+              button.btn.btn-sm.btn-secondary data-dismiss='modal' type='button'  閉じる
