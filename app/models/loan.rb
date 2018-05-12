@@ -4,9 +4,10 @@ class Loan < ApplicationRecord
 
   has_one :book_review
 
-  validates :started_at, presence: true
-  validates :ended_at, presence: true
-  validates :book_title, presence: true
+  # 入力されるものではないのでバリデーションは不要かも
+  # validates :started_at, presence: true
+  # validates :ended_at, presence: true
+  # validates :book_title, presence: true
 
   # TODO
   # scope :lending, -> { where()}

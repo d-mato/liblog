@@ -1,10 +1,10 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :loan do
-    user nil
-    library nil
-    started_at "2017-08-27"
-    ended_at "2017-08-27"
-    book_title "MyString"
-    isbn "MyString"
+    user
+    library
+    started_at { Faker::Date.between(14.days.ago, Date.today) }
+    ended_at { Faker::Date.between(Date.tomorrow, 14.days.since) }
+    last_fetched_at { Date.today }
+    book_title { Faker::Book.title }
   end
 end

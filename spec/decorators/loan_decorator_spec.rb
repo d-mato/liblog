@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe LoanDecorator do
   let(:loan) { Loan.new.extend LoanDecorator }
