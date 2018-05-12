@@ -12,7 +12,7 @@ class LoansController < ApplicationController
         Loan.arel_table[:author].matches(pattern),
         BookReview.arel_table[:comment].matches(pattern)
       ].inject { |memo, c| memo.or(c) }
-      @loans = @loans.includes(:book_review).where(condition)
+      @loans = @loans.eager_load(:book_review).where(condition)
     end
   end
 

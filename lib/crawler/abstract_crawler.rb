@@ -1,3 +1,6 @@
+# TODO: Railsのモデルに依存しない、純粋なクローラーとして再実装したい
+#       ID、パスワードを渡し、貸出情報をLoanでは無く単純なHashやStructで返すようなものであれば望ましい
+
 module Crawler
   class AbstractCrawler
     def initialize(library_user)
