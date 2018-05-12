@@ -2,7 +2,7 @@ class LoansController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @loans = current_user.loans.eager_load(:library).order(ended_at: :desc)
+    @loans = current_user.loans.includes(:library, :book_review).order(ended_at: :desc)
 
     @q = params[:q]
     if @q.present?
