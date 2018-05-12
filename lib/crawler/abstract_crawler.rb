@@ -7,6 +7,7 @@ module Crawler
 
     def exec
       login
+      @library_user.call_signed_in!
 
       # 一旦既存の貸出を全て返却済みにする
       @library_user.loans.update_all(returned: true)
