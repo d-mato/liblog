@@ -1,6 +1,15 @@
-Library.create(
-  [
-    { name: '戸田市立図書館', crawler: 'Crawler::TodaCrawler' },
-    { name: '中央区立図書館', crawler: 'Crawler::ChuoCrawler' },
-  ]
-)
+ActiveRecord::Base.transaction do
+  user = User.create!(
+    email: 'user@example.com',
+    password: '123456'
+  )
+
+  library = Library.create!(name: '戸田市立図書館', crawler: 'Crawler::TodaCrawler')
+  user.library_users.create!(library: library, sign_in_id: '3546058', password: 'nhc4')
+
+  library = Library.create!(name: '中央区立図書館', crawler: 'Crawler::ChuoCrawler')
+  user.library_users.create!(library: library, sign_in_id: '003386786', password: '78671704')
+
+  library = Library.create!(name: '江東区立図書館', crawler: 'Crawler::KotoCrawler')
+  user.library_users.create!(library: library, sign_in_id: '006770242', password: 'xmsq84')
+end
