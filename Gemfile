@@ -40,6 +40,7 @@ gem 'mechanize'
 gem 'pry-rails'
 gem 'ridgepole'
 gem 'slim-rails'
+gem 'sidekiq'
 
 group :development, :test do
   gem 'capistrano-rails'

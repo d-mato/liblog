@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   root 'loans#index'
   devise_for :users
@@ -9,5 +11,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root 'application#index'
     resources :crawler_workers, only: :create
+
+    mount Sidekiq::Web => '/sidekiq'
   end
 end

@@ -1,4 +1,16 @@
-
 p hello
 
 p user: #{current_user.email}
+
+button#crawler-start Start Crawler
+
+javascript:
+  $('#crawler-start').on('click', function () {
+    Rails.ajax({
+      url: '/admin/crawler_workers',
+      type: 'post',
+      success: function () {
+        alert('Started!')
+      }
+    })
+  })
