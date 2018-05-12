@@ -40,7 +40,9 @@ gem 'mechanize'
 gem 'pry-rails'
 gem 'ridgepole'
 gem 'slim-rails'
-gem 'sidekiq'
+gem 'activeadmin'
+gem 'rails-i18n'
+gem 'devise-i18n'
 
 group :development, :test do
   gem 'capistrano-rails'
