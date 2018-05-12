@@ -5,15 +5,17 @@ create_table :book_reviews, force: :cascade do |t|
   t.integer :loan_id, null: false
   t.integer :star
   t.text :comment, null: false
-  t.timestamps null: false
+  t.datetime :created_at, null: false
+  t.datetime :updated_at, null: false
+
   t.index :loan_id
 end
 
 create_table :libraries, force: :cascade do |t|
   t.string :name, null: false
+  t.string :crawler
   t.datetime :created_at, null: false
   t.datetime :updated_at, null: false
-  t.string :crawler
 end
 
 create_table :library_users, force: :cascade do |t|
@@ -25,6 +27,7 @@ create_table :library_users, force: :cascade do |t|
   t.datetime :last_sign_in_at
   t.datetime :created_at, null: false
   t.datetime :updated_at, null: false
+
   t.index [:user_id, :library_id], unique: true
 end
 
@@ -56,6 +59,7 @@ create_table :users, force: :cascade do |t|
   t.string :last_sign_in_ip
   t.datetime :created_at, null: false
   t.datetime :updated_at, null: false
+
   t.index [:email]
   t.index [:reset_password_token], unique: true
 end
