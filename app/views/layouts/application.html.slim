@@ -20,8 +20,8 @@ html
           li.nav-item class=('active' if controller_name == 'library_users')
             = link_to 'Account', library_users_path, class: 'nav-link'
 
-        form.form-inline.my-2.my-lg-0
-          input.form-control.mr-sm-2 aria-label="Search" placeholder="Search" type="search" /
+        form.form-inline.my-2.my-lg-0 action="/loans"
+          input.form-control.mr-sm-2 aria-label="Search" placeholder="Search" type="search" name="q" value=@q
           button.btn.btn-outline-success.my-2.my-sm-0 type="submit"  Search
 
     .container-fluid
