@@ -1,6 +1,6 @@
 class LibraryUsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_library_user, only: %i(edit update destroy)
+  before_action :set_library_user, only: %i(edit update destroy activate)
 
   def index
     @library_users = current_user.library_users
@@ -33,7 +33,17 @@ class LibraryUsersController < ApplicationController
 
   def destroy
     @library_user.destroy!
-    redirect_to library_users_url, notice: '連携設定を解除しました'
+    redirect_to library_users_url
+  end
+
+  def activate
+    if request.patch?
+      @library_user.update!(active: true)
+    elsif request.delete?
+      @library_user.update!(active: false)
+    end
+
+    redirect_to library_users_url
   end
 
   private
@@ -43,6 +53,6 @@ class LibraryUsersController < ApplicationController
   end
 
   def library_user_params
-    params.require(:library_user).permit(%i(library_id sign_in_id password))
+    params.require(:library_user).permit(%i(library_id sign_in_id password active))
   end
 end

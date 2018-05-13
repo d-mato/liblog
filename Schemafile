@@ -27,6 +27,7 @@ end
 create_table :library_users, force: :cascade do |t|
   t.integer :user_id, null: false
   t.integer :library_id, null: false
+  t.boolean :active, null: false, default: true
   t.string :sign_in_id, null: false
   t.string :password, null: false
   t.integer :sign_in_count, default: 0, null: false

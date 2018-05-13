@@ -8,9 +8,10 @@
         th ログインID
         th パスワード
         th
+        th
 
     tbody
-      - @library_users.each do |library_user|
+      - @library_users.order(id: :asc).each do |library_user|
         tr
           td = library_user.library.name
           td = library_user.sign_in_id
@@ -19,4 +20,11 @@
             / = library_user.password.gsub(/./, '*')
             / button.btn.btn-sm.btn-light.ml-1 表示
 
-          td = link_to '連携を解除する', library_user, data: { confirm: '連携を解除すると貸出情報が同期されなくなります。よろしいですか？' }, method: :delete
+          td
+            - if library_user.active?
+              = link_to '連携を解除する', [:activate, library_user], data: { confirm: '連携を解除すると貸出情報が同期されなくなります。よろしいですか？' }, method: :delete
+            - else
+              = link_to '連携する', [:activate, library_user], method: :patch
+          td
+            - unless library_user.active?
+              = link_to '削除', library_user, data: { confirm: '削除してもよろしいですか？' }, method: :delete, class: 'btn btn-danger btn-sm'
