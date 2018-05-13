@@ -1,7 +1,7 @@
 .py-3
   h3 アカウント
 
-  table.table
+  table.table.d-none.d-md-table
     thead
       tr
         th 図書館
@@ -11,7 +11,7 @@
         th
 
     tbody
-      - @library_users.order(id: :asc).each do |library_user|
+      - @library_users.each do |library_user|
         tr
           td = library_user.library.name
           td = library_user.sign_in_id
@@ -28,3 +28,16 @@
           td
             - unless library_user.active?
               = link_to '削除', library_user, data: { confirm: '削除してもよろしいですか？' }, method: :delete, class: 'btn btn-danger btn-sm'
+
+  ul.list-group.d-md-none
+    - @library_users.each do |library_user|
+      li.list-group-item
+        div = library_user.library.name
+        div ID: #{library_user.sign_in_id}
+        div パスワード: #{library_user.password}
+
+        - if library_user.active?
+          div = link_to '連携を解除する', [:activate, library_user], data: { confirm: '連携を解除すると貸出情報が同期されなくなります。よろしいですか？' }, method: :delete
+        - else
+          div = link_to '連携する', [:activate, library_user], method: :patch
+          .float-right = link_to '削除', library_user, data: { confirm: '削除してもよろしいですか？' }, method: :delete, class: 'btn btn-danger btn-sm'
