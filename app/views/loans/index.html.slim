@@ -1,14 +1,14 @@
 .py-4
   table.table.table-sm.d-none.d-md-table
     tr
-      th レビュー
-      th タイトル
-      th 著者
-      th 貸出日
-      th 返却期限
-      th 図書館
-      th 貸出場所
-      th 最終情報取得
+      th = Loan.human_attribute_name :book_review
+      th = Loan.human_attribute_name :book_title
+      th = Loan.human_attribute_name :author
+      th = Loan.human_attribute_name :started_at
+      th = Loan.human_attribute_name :ended_at
+      th = Loan.human_attribute_name :library
+      th = Loan.human_attribute_name :place_name
+      th = Loan.human_attribute_name :last_fetched_at
 
     - @loans.each do |loan|
       tr[class=('text-muted' if loan.returned?)]

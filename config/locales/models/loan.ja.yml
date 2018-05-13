@@ -1,0 +1,17 @@
+ja:
+  activerecord:
+    attributes:
+      loan:
+        started_at: 貸出日
+        ended_at: 返却期限
+        place_name: 貸出場所
+        book_title: タイトル
+        author: 著者
+        isbn: ISBN
+        last_fetched_at: 最終情報取得
+        returned: 返却済み
+        # relational_model
+        user: ユーザー
+        library: 図書館
+        book_review: レビュー
+

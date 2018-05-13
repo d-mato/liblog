@@ -2,34 +2,34 @@
   h3 貸出情報
   table.table
     tr
-      th タイトル
+      th = Loan.human_attribute_name :book_title
       td = @loan.book_title
     tr
-      th 著者
+      th = Loan.human_attribute_name :author
       td = @loan.author
     tr
-      th ISBN
+      th = Loan.human_attribute_name :isbn
       td = @loan.isbn
     tr
-      th 貸出日
+      th = Loan.human_attribute_name :started_at
       td = simple_date(@loan.started_at)
     tr
-      th 返却期限
+      th = Loan.human_attribute_name :ended_at
       td[class=('bg-danger text-white' if @loan.arrears?)] = simple_date(@loan.ended_at)
     tr
-      th 図書館
+      th = Loan.human_attribute_name :library
       td = @loan.library.name
     tr
-      th 貸出場所
+      th = Loan.human_attribute_name :place_name
       td = @loan.place_name
     tr
-      th 最終情報取得
+      th = Loan.human_attribute_name :last_fetched_at
       td = simple_date(@loan.last_fetched_at)
 
 .py-2
   .card
     .card-body
-      h5.card-title レビュー
+      h5.card-title = Loan.human_attribute_name :book_review
       - if @loan.book_review
         p.card-text
           = '★ ' * @loan.book_review.star.to_i
