@@ -33,16 +33,16 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'pg'
 
 gem 'active_decorator'
+gem 'activeadmin'
 gem 'bootstrap'
 gem 'devise'
+gem 'devise-i18n'
 gem 'jquery-rails'
 gem 'mechanize'
 gem 'pry-rails'
+gem 'rails-i18n'
 gem 'ridgepole'
 gem 'slim-rails'
-gem 'activeadmin'
-gem 'rails-i18n'
-gem 'devise-i18n'
 
 group :development, :test do
   gem 'capistrano-rails'
