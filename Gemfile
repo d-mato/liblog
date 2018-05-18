@@ -43,6 +43,7 @@ gem 'pry-rails'
 gem 'rails-i18n'
 gem 'ridgepole'
 gem 'slim-rails'
+gem 'webpacker'
 
 group :development, :test do
   gem 'capistrano-rails'
