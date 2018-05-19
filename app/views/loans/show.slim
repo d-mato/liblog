@@ -1,3 +1,8 @@
+= content_for :breadcrumb do
+  ol.breadcrumb
+    li.breadcrumb-item = link_to 'loans', loans_path
+    li.breadcrumb-item.active = @loan.book_title.truncate(16)
+
 .py-4
   h3 貸出情報
   table.table

@@ -15,14 +15,18 @@ html
 
       #navbarSupportedContent.collapse.navbar-collapse
         ul.navbar-nav.mr-auto
-          li.nav-item class=('active' if controller_name == 'loans')
+          li.nav-item class=('active' if controller_name == 'loans' && action_name.in?(%w[index show]))
             = link_to 'Loans', loans_path, class: 'nav-link'
+          li.nav-item class=('active' if controller_name == 'loans' && action_name == 'calendar')
+            = link_to 'Calendar', calendar_path, class: 'nav-link'
           li.nav-item class=('active' if controller_name == 'library_users')
             = link_to 'Account', library_users_path, class: 'nav-link'
 
         form.form-inline.my-2.my-lg-0 action="/loans"
           input.form-control.mr-sm-2 aria-label="Search" placeholder="Search" type="search" name="q" value=@q
           button.btn.btn-outline-success.my-2.my-sm-0 type="submit"  Search
+
+    nav = yield(:breadcrumb)
 
     .container-fluid
       - if notice
