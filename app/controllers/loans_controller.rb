@@ -19,4 +19,8 @@ class LoansController < ApplicationController
   def show
     @loan = current_user.loans.find(params[:id])
   end
+
+  def calendar
+
+  end
 end

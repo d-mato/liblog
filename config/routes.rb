@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'loans#index'
+  root 'loans#calendar'
   devise_for :users
   resources :loans, only: %i(index show) do
     resource :book_review, only: %i(create update)
