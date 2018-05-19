@@ -12,13 +12,12 @@ module Crawler
       login
       @library_user.call_signed_in!
 
-      loans = _fetch_loans
       now = Time.current
       ActiveRecord::Base.transaction do
         # 一旦既存の貸出を全て返却済みにする
         @library_user.loans.update_all(returned: true)
 
-        loans.each do |loan|
+        _fetch_loans.each do |loan|
           loan.user ||= @library_user.user
           loan.attributes = { last_fetched_at: now, returned: false }
           loan.save!
