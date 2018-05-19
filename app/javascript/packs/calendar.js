@@ -6,20 +6,23 @@ Vue.use(FullCalendar)
 const App = {
   el: '#app',
   data: {
-    events: []
+    events: [],
+    config: {
+      eventClick (event) {
+        console.log(event)
+      }
+    }
   },
   created () {
     $.get('/loans.json').then(loans => {
       loans.forEach(loan => {
+        // 返却日をイベント登録
         this.events.push({
           title: loan.book_title,
-          // 貸出期間を全てイベント登録すると見辛い ...
-          // start: loan.started_at,
-          // end: loan.ended_at,
-          start: loan.ended_at, // 返却日をイベント登録
-          end: loan.ended_at,
+          url: `/loans/${loan.id}`,
+          start: loan.ended_at,
           allDay: true,
-          color: 'red',
+          color: loan.returned ? 'grey' : 'red',
           textColor: 'white'
         })
 
