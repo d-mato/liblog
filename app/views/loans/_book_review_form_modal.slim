@@ -11,7 +11,7 @@ javascript:
   .modal-dialog role='document' style='max-width: 55rem;'
     .modal-content
       .modal-body
-        = form_with model: (loan.book_review || BookReview.new), url: loan_book_review_path(loan) do |f|
+        = form_with model: (loan.book_review || BookReview.new), url: loan_book_review_path(loan), local: true do |f|
           .form-group
             = f.label :comment
             = f.text_area :comment, class: 'form-control'
