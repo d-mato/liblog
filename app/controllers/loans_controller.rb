@@ -4,8 +4,7 @@ class LoansController < ApplicationController
   def index
     @loans = current_user.loans.includes(:library, :book_review).order(ended_at: :desc)
 
-    @q = params[:q]
-    if @q.present?
+    if (@q = params[:q]).present?
       pattern = "%#{@q}%"
       condition = [
         Loan.arel_table[:book_title].matches(pattern),
@@ -20,7 +19,5 @@ class LoansController < ApplicationController
     @loan = current_user.loans.find(params[:id])
   end
 
-  def calendar
-
-  end
+  def calendar; end
 end
