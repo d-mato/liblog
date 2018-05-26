@@ -43,6 +43,7 @@ gem 'rails-i18n'
 gem 'ridgepole'
 gem 'slim-rails'
 gem 'webpacker'
+gem 'whenever', require: false
 
 group :development, :test do
   gem 'capistrano-rails'
