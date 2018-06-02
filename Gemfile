@@ -52,5 +52,6 @@ group :development, :test do
   gem 'capistrano3-ridgepole'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'letter_opener'
   gem 'rspec-rails'
 end

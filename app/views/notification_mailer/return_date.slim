@@ -1,0 +1,16 @@
+- th_style = 'border: solid 1px #ccc; text-align: left; padding: 5px; background-color: #ddefff; width: 90px;'
+- td_style = 'border: solid 1px #ccc; padding: 5px;'
+
+p 返却日が近い本をお知らせします
+
+- @loans.each do |loan|
+  table style="width: 460px; border-collapse: collapse; border: solid 1px #ccc; margin: 10px 0;"
+    tr
+      th style=th_style タイトル
+      td style=td_style = loan.book_title
+    tr
+      th style=th_style 返却日
+      td style=td_style = simple_date(loan.ended_at)
+    tr
+      th style=th_style 図書館
+      td style=td_style = loan.library.name
