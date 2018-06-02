@@ -3,7 +3,7 @@
     li.breadcrumb-item = link_to 'loans', loans_path
     li.breadcrumb-item.active = @loan.book_title.truncate(16)
 
-.py-4
+.py-2
   h3 貸出情報
   table.table
     tr
@@ -30,6 +30,10 @@
     tr
       th = Loan.human_attribute_name :last_fetched_at
       td = simple_date(@loan.last_fetched_at)
+
+.py-2
+  - unless @loan.returned?
+    = link_to '延長する', [:extend_loan, @loan], method: :post, data: { confirm: '貸出期間を延長します' }, class: 'btn btn-info'
 
 .py-2
   .card

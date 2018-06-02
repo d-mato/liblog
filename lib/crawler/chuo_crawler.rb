@@ -41,5 +41,9 @@ module Crawler
         loan
       end
     end
+
+    def extend_loan(book_title)
+      raise CannotExtendError, book_title
+    end
   end
 end

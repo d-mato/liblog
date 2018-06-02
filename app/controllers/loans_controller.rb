@@ -20,4 +20,20 @@ class LoansController < ApplicationController
   end
 
   def calendar; end
+
+  # 延長
+  def extend_loan
+    loan = current_user.loans.find(params[:id])
+    library_user = current_user.library_users.find_by!(library: loan.library)
+    crawler = loan.library.crawler.constantize.new(id: library_user.sign_in_id, password: library_user.password)
+
+    crawler.login
+
+    begin
+      crawler.extend_loan(loan.book_title)
+      redirect_to loan, notice: '延長しました！'
+    rescue Crawler::CannotExtendError
+      redirect_to loan, alert: '延長処理に失敗しました。お手数ですが図書館Webサイトにログインして確認してください。'
+    end
+  end
 end

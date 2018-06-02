@@ -46,5 +46,25 @@ module Crawler
       end
       loans
     end
+
+    def extend_loan(book_title)
+      client.get 'https://www.koto-lib.tokyo.jp/opw/OPW/OPWUSERINFO.CSP'
+      doc.xpath('//table[2]/tr').each do |tr|
+        if tr.xpath('td[3]').text.strip == book_title
+          form = client.page.form_with!(name: 'FormLEND')
+          button_el = tr.at('td[2]/input')
+          raise StandardError, '延長ボタンが見つかりません' unless button_el
+          button = form.button_with!(name: button_el[:name])
+          client.submit(form, button)
+
+          form = client.page.form_with!(name: 'CheckForm')
+          button = form.button_with!(name: 'chkLKOUSIN')
+          client.submit(form, button)
+        end
+      end
+    rescue => e
+      Rails.logger.error e.backtrace.join("\n")
+      raise CannotExtendError, book_title
+    end
   end
 end

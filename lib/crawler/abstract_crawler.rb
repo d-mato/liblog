@@ -13,6 +13,10 @@ module Crawler
       raise NotImplementedError
     end
 
+    def extend_loan(book_title)
+      raise NotImplementedError
+    end
+
     private
 
     def client
@@ -25,4 +29,5 @@ module Crawler
   end
 
   class CannotLogInError < StandardError; end
+  class CannotExtendError < StandardError; end
 end
