@@ -54,4 +54,5 @@ group :development, :test do
   gem 'faker'
   gem 'letter_opener'
   gem 'rspec-rails'
+  gem 'rspec_junit_formatter'
 end
