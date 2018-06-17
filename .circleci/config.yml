@@ -1,0 +1,48 @@
+version: 2
+jobs:
+  build:
+    # parallelism: 3
+    working_directory: ~/liblog
+    docker:
+      - image: circleci/ruby:2.5.1-node
+        environment:
+          RAILS_ENV: test
+          DB_HOST: 127.0.0.1
+      - image: circleci/postgres
+#        environment:
+#          MYSQL_USER: root
+#          MYSQL_ALLOW_EMPTY_PASSWORD: true
+    steps:
+      - checkout
+
+      # Restore bundle cache
+      - restore_cache:
+          key: liblog-{{ checksum "Gemfile.lock" }}
+
+      - run:
+          name: Bundle Install
+          command: bundle install
+
+      # Store bundle cache
+      - save_cache:
+          key: liblog-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
+      - run: cp .circleci/database.yml config/
+
+      # Database setup
+      - run:
+          name: Database setup
+          command: bundle exec ridgepole -E test -c config/database.yml -a
+
+      - run:
+          name: Run rspec in parallel
+          command: |
+            bundle exec rspec --profile 10 \
+                              --out test_results/rspec.xml \
+                              --format progress \
+                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+
+      - store_test_results:
+          path: test_results
