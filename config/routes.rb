@@ -14,4 +14,6 @@ Rails.application.routes.draw do
   end
 
   ActiveAdmin.routes(self)
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
 end

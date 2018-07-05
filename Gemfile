@@ -41,6 +41,7 @@ gem 'mechanize'
 gem 'pry-rails'
 gem 'rails-i18n'
 gem 'ridgepole'
+gem 'sidekiq'
 gem 'slim-rails'
 gem 'webpacker'
 gem 'whenever', require: false
