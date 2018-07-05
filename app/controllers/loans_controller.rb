@@ -31,7 +31,7 @@ class LoansController < ApplicationController
 
     begin
       crawler.extend_loan(loan.book_title)
-      CrawlerJob.perform_later(library_user.id)
+      # CrawlerJob.perform_later(library_user.id)
       redirect_to loan, notice: '延長しました！返却期限は後ほど更新されます'
     rescue Crawler::CannotExtendError
       redirect_to loan, alert: '延長処理に失敗しました。お手数ですが図書館Webサイトにログインして確認してください。'
