@@ -43,6 +43,29 @@ module Crawler
     end
 
     def extend_loan(book_title)
+      client.get 'https://www.library.city.chuo.tokyo.jp/rentallist'
+      doc.css('.infotable').each do |table|
+        detail_link = table.at('h3.space a')
+        next unless detail_link.text.strip == book_title
+
+        client.get detail_link[:href]
+
+        form = client.page.forms.first
+        button = form.button_with(name: 'buttonRenew')
+        raise StandardError, '延長ボタンが見つかりません' unless button
+        client.submit(form, button)
+
+        form = client.page.forms.first
+        button = form.button_with!(name: 'buttonSubmit')
+        client.submit(form, button)
+
+        return true
+      end
+
+      raise StandardError, '対象の本が見つかりません'
+    rescue => e
+      Rails.logger.error e.message
+      Rails.logger.error e.backtrace.join("\n")
       raise CannotExtendError, book_title
     end
   end
