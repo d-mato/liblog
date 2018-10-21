@@ -33,7 +33,10 @@
 
 .py-2
   - unless @loan.returned?
-    = link_to '延長する', [:extend_loan, @loan], method: :post, data: { confirm: '貸出期間を延長します' }, class: 'btn btn-info'
+    = link_to '延長する', [:extend_loan, @loan], method: :post, data: { confirm: '貸出期間を延長します' }, class: 'btn btn-info mx-2'
+
+  - unless @loan.returned?
+    = link_to '返却済みにする', [:set_returned, @loan], method: :patch, data: { confirm: '返却済みにします' }, class: 'btn btn-info mx-2'
 
 .py-2
   .card

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'calendar' => 'loans#calendar'
   resources :loans, only: %i(index show) do
     post :extend_loan, on: :member
+    patch :set_returned, on: :member
     resource :book_review, only: %i(create update)
   end
   resources :library_users, except: %i(show) do
