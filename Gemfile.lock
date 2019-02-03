@@ -118,6 +118,9 @@ GEM
     domain_name (0.5.20180417)
       unf (>= 0.0.5, < 1.0.0)
     erubi (1.7.1)
+    exception_notification (4.3.0)
+      actionmailer (>= 4.0, < 6)
+      activesupport (>= 4.0, < 6)
     execjs (2.7.0)
     factory_bot (4.10.0)
       activesupport (>= 3.0.0)
@@ -373,6 +376,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   devise-i18n
+  exception_notification
   factory_bot_rails
   faker
   jbuilder (~> 2.5)
