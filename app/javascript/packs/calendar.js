@@ -1,6 +1,7 @@
 import Vue from 'vue/dist/vue.esm'
 import FullCalendar from 'vue-full-calendar'
 import 'fullcalendar/dist/fullcalendar.min.css'
+import $ from 'jquery'
 Vue.use(FullCalendar)
 
 const App = {

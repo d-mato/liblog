@@ -7,7 +7,6 @@ end
 
 gem 'rails', '~> 5.2'
 gem 'puma', '~> 3.7'
-gem 'sassc-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -34,14 +33,13 @@ gem 'active_decorator'
 gem 'devise'
 gem 'devise-i18n'
 gem 'exception_notification'
-gem 'jquery-rails'
 gem 'mechanize'
 gem 'pry-rails'
 gem 'rails-i18n'
 gem 'ridgepole'
 gem 'sidekiq'
 gem 'slim-rails'
-gem 'webpacker', '~> 3.0'
+gem 'webpacker'
 gem 'whenever', require: false
 
 group :development, :test do
