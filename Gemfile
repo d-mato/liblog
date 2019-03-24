@@ -31,7 +31,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'pg'
 
 gem 'active_decorator'
-gem 'bootstrap'
 gem 'devise'
 gem 'devise-i18n'
 gem 'exception_notification'
