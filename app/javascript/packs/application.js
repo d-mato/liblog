@@ -4,4 +4,6 @@ import '../stylesheets/application.scss'
 
 window.$ = jquery
 window.jquery = jquery
+window.jQuery = jquery
+
 Rails.start()

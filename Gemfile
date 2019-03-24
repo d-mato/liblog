@@ -41,7 +41,7 @@ gem 'rails-i18n'
 gem 'ridgepole'
 gem 'sidekiq'
 gem 'slim-rails'
-gem 'webpacker'
+gem 'webpacker', '~> 3.0'
 gem 'whenever', require: false
 
 group :development, :test do
