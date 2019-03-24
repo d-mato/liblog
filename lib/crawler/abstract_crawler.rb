@@ -20,7 +20,9 @@ module Crawler
     private
 
     def client
-      @client ||= Mechanize.new
+      @client ||= Mechanize.new do |m|
+        m.user_agent_alias = 'Windows Chrome'
+      end
     end
 
     def doc
