@@ -1,11 +1,11 @@
 module Crawler
   class TodaCrawler < AbstractCrawler
     def login
-      client.get 'https://library.toda.saitama.jp/'
+      client.get 'https://library.toda.saitama.jp/opw/OPW/OPWUSERCONF.CSP?DB=LIB'
       form = client.page.form_with(name: 'usercheck')
       form.field_with!(name: 'usercardno').value = @account[:id]
       form.field_with!(name: 'userpasswd').value = @account[:password]
-      client.click form.button_with!(class: 'btnLogin')
+      client.click form.button_with!(name: 'Login')
 
       # JavaScriptが無効ですと言われるが、一覧ページには入れる
       client.get 'https://library.toda.saitama.jp/opw/OPW/OPWUSERINFO.CSP'
