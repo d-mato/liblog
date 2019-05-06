@@ -7,6 +7,7 @@ html
     = csrf_meta_tags
     = stylesheet_pack_tag 'application'
     = javascript_pack_tag 'application'
+    link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"
   body
     nav.navbar.navbar-expand-lg.navbar-light.bg-light
       a.navbar-brand href="/"  Liblog
@@ -16,11 +17,17 @@ html
       #navbarSupportedContent.collapse.navbar-collapse
         ul.navbar-nav.mr-auto
           li.nav-item class=('active' if controller_name == 'loans' && action_name.in?(%w[index show]))
-            = link_to 'Loans', loans_path, class: 'nav-link'
+            = link_to loans_path, class: 'nav-link' do
+              i class="fas fa-book-open mr-1"
+              | Loans
           li.nav-item class=('active' if controller_name == 'loans' && action_name == 'calendar')
-            = link_to 'Calendar', calendar_path, class: 'nav-link'
+            = link_to calendar_path, class: 'nav-link' do
+              i class="far fa-calendar-alt mr-1"
+              | Calendar
           li.nav-item class=('active' if controller_name == 'library_users')
-            = link_to 'Account', library_users_path, class: 'nav-link'
+            = link_to library_users_path, class: 'nav-link' do
+              i class="fas fa-user mr-1"
+              | Account
 
         form.form-inline.my-2.my-lg-0 action="/loans"
           input.form-control.mr-sm-2 aria-label="Search" placeholder="Search" type="search" name="q" value=@q

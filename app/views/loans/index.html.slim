@@ -2,7 +2,10 @@
   .list-group
     - @loans.each do |loan|
       = link_to loan, class: 'list-group-item text-decoration-none', style: loan.returned? ? '' : 'background: aliceblue;' do
-        div = loan.book_title
+        .d-flex.align-items-center
+          - if loan.book_review
+            i class="far fa-comment-alt mr-1"
+          .font-weight-bold = loan.book_title
         .text-right.small
           - if loan.returned?
             .badge.badge-secondary 返却済
