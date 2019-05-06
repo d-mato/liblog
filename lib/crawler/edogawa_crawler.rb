@@ -28,7 +28,7 @@ module Crawler
         loan = {
           started_at: Date.parse(doc.at('#lblKasDate').text),
           book_title: doc.at("//div[@class='list_syo']/text()").text.strip,
-          author: doc.at("//div[@class='list_cyo']/text()").text.strip,
+          author: doc.at("//div[@class='list_cyo']/text()")&.text.to_s.strip,
           place_name: doc.at('#lblKasBasho').text.strip,
           ended_at: Date.parse(doc.at('#lblHenDate').text)
         }
