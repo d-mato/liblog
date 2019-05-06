@@ -1,29 +1,7 @@
 .py-4
-  table.table.table-sm.d-none.d-md-table
-    tr
-      th = Loan.human_attribute_name :book_review
-      th = Loan.human_attribute_name :book_title
-      th = Loan.human_attribute_name :author
-      th = Loan.human_attribute_name :started_at
-      th = Loan.human_attribute_name :ended_at
-      th = Loan.human_attribute_name :library
-      th = Loan.human_attribute_name :place_name
-      th = Loan.human_attribute_name :last_fetched_at
-
+  .list-group
     - @loans.each do |loan|
-      tr[class=('text-muted' if loan.returned?)]
-        td = 'あり' if loan.book_review
-        td = link_to loan.book_title, loan
-        td = loan.author.truncate(20)
-        td = simple_date(loan.started_at)
-        td[class=('bg-danger text-white' if loan.arrears?)] = simple_date(loan.ended_at)
-        td = loan.library.name
-        td = loan.place_name
-        td = simple_date(loan.last_fetched_at)
-
-  .list-group.d-md-none
-    - @loans.each do |loan|
-      = link_to loan, class: 'list-group-item', style: loan.returned? ? '' : 'background: aliceblue;' do
+      = link_to loan, class: 'list-group-item text-decoration-none', style: loan.returned? ? '' : 'background: aliceblue;' do
         div = loan.book_title
         .text-right.small
           - if loan.returned?
