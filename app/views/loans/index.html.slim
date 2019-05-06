@@ -4,7 +4,7 @@
       = link_to loan, class: 'list-group-item text-decoration-none', style: loan.returned? ? '' : 'background: aliceblue;' do
         .d-flex.align-items-center
           - if loan.book_review
-            i class="far fa-comment-alt mr-1"
+            i class="far fa-comment-alt mr-1" data-toggle="tooltip" title="レビューあり"
           .font-weight-bold = loan.book_title
         .text-right.small
           - if loan.returned?
