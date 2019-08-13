@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'rails', '~> 6.0.0.rc2'
-gem 'puma', '~> 3.7'
+gem 'puma', '~> 4.1'
 gem 'uglifier', '>= 1.3.0'
 gem 'jbuilder', '~> 2.9'
 gem 'bootsnap', '>= 1.1.0', require: false
