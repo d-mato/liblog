@@ -13,4 +13,4 @@ test:
 
 production:
   <<: *default
-  database: liblog_production
+  url: <%= ENV['DATABASE_URL'] %>
