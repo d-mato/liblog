@@ -16,10 +16,7 @@
           td = library_user.library.name
           td = library_user.sign_in_id
           td
-            = library_user.password
-            / = library_user.password.gsub(/./, '*')
-            / button.btn.btn-sm.btn-light.ml-1 表示
-
+            span[data-toggle="tooltip" title=(library_user.password)] ******
           td
             - if library_user.active?
               = link_to '連携を解除する', [:activate, library_user], data: { confirm: '連携を解除すると貸出情報が同期されなくなります。よろしいですか？' }, method: :delete
