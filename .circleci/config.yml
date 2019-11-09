@@ -6,11 +6,8 @@ jobs:
     docker:
       - image: circleci/ruby:2.6.4-node-browsers
         environment:
-          DATABASE_URL: postgres://postgres:postgres@postgres/liblog_test
+          DATABASE_URL: postgres://root@localhost/liblog_test
       - image: circleci/postgres
-        environment:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
     steps:
       - checkout
 
