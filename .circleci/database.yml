@@ -1,6 +1,3 @@
 test:
   adapter: postgresql
-  database: circle_test
-  username: root
-  pool: 5
-  host: 127.0.0.1
+  url: <%= ENV['DATABASE_URL'] %>
