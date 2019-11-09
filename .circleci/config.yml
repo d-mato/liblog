@@ -20,7 +20,7 @@ jobs:
 
       - run:
           name: Bundle Install
-          command: bundle install
+          command: bundle install --path vendor/bundle
 
       - save_cache:
           key: liblog-{{ checksum "Gemfile.lock" }}
