@@ -4,7 +4,7 @@ jobs:
     # parallelism: 3
     working_directory: ~/liblog
     docker:
-      - image: circleci/ruby:2.6.4-node-browser
+      - image: circleci/ruby:2.6.4-node-browsers
         environment:
           DATABASE_URL: postgres://postgres:postgres@postgres/liblog_test
       - image: circleci/postgres
