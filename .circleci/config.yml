@@ -19,7 +19,7 @@ jobs:
           key: liblog-{{ checksum "Gemfile.lock" }}
 
       - run:
-          name: Bundle Install
+          name: Install gems
           command: bundle install --path vendor/bundle
 
       - save_cache:
@@ -27,8 +27,26 @@ jobs:
           paths:
             - vendor/bundle
 
+      - restore_cache:
+          key: liblog-{{ checksum "yarn.lock" }}
+
       - run:
-          name: Database setup
+          name: Install node modules
+          command: |
+            yarn
+
+      - save_cache:
+          key: liblog-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+
+      - run:
+          name: Build assets
+          command: |
+            bin/rails assets:precompile
+
+      - run:
+          name: Set up database
           command: |
             cp .circleci/database.yml config/
             bundle exec ridgepole -E test -c config/database.yml -a
