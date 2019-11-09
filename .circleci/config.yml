@@ -8,6 +8,10 @@ jobs:
         environment:
           DATABASE_URL: postgres://root@localhost/liblog_test
       - image: circleci/postgres
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_DB: liblog_test
+
     steps:
       - checkout
 
