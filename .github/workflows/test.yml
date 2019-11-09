@@ -1,0 +1,43 @@
+name: Test
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: ruby:2.6.4
+      env:
+        DATABASE_URL: postgres://postgres:postgres@postgres/liblog_test
+    services:
+      postgres:
+        image: postgres:11
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up yarn and node
+      run: |
+        curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+        echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+        curl -sL https://deb.nodesource.com/setup_12.x | bash -
+        apt-get install -y yarn nodejs
+    - name: Install chrome
+      run: |
+        wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
+        echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' | tee /etc/apt/sources.list.d/google-chrome.list
+        apt-get update -y
+        apt-get install -y google-chrome-stable
+    - name: Build
+      run: |
+        bundle -j 4
+        bin/rails yarn:install assets:precompile
+    - name: Set up database
+      run: |
+        cp .github/database.yml config/database.yml
+        bin/rails db:create
+        bundle exec ridgepole -a -c config/database.yml -E test
+    - name: Run test
+      run: |
+        bundle exec rspec
