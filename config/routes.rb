@@ -13,7 +13,4 @@ Rails.application.routes.draw do
       delete :activate
     end
   end
-
-  require 'sidekiq/web'
-  mount Sidekiq::Web => '/sidekiq'
 end
