@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+  def endpoint
+  end
+
   private
 
   def authenticate_admin_user!

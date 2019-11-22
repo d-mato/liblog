@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  root 'loans#index'
   devise_for :users
   get 'calendar' => 'loans#calendar'
   resources :loans, only: %i(index show) do
@@ -13,4 +12,6 @@ Rails.application.routes.draw do
       delete :activate
     end
   end
+
+  root 'application#endpoint'
 end
