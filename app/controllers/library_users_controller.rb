@@ -3,7 +3,7 @@ class LibraryUsersController < ApplicationController
   before_action :set_library_user, only: %i(edit update destroy activate)
 
   def index
-    @library_users = current_user.library_users.order(id: :asc)
+    @library_users = current_user.library_users.includes(:library).order(id: :asc)
   end
 
   def new
