@@ -2,17 +2,14 @@
 import Vue from 'vue/dist/vue.esm'
 import VueRouter from 'vue-router'
 
-import Top from 'components/top.vue'
+import Loans from 'components/loans.vue'
+import Loan from 'components/loan.vue'
 
 Vue.use(VueRouter)
 
-const Foo = { template: '<div>foo</div>' }
-const Bar = { template: '<div>bar</div>' }
-
 const routes = [
-  { path: '/', component: Top },
-  { path: '/foo', component: Foo },
-  { path: '/bar', component: Bar }
+  { path: '/', component: Loans },
+  { path: '/loans/:id', component: Loan },
 ]
 
 const router = new VueRouter({
