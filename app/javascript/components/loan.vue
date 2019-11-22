@@ -46,9 +46,7 @@
         <div class="card-body">
           <h5 class="card-title">book_review</h5>
           <div v-if="loan.book_review">
-            <p class="card-text">
-              <span>★ {{loan.book_review.star}}</span>
-            </p>
+            <p class="card-text">{{render_review_star}}</p>
             <p class="card-text" v-html="render_review_comment"></p>
           </div>
           <a href="#">レビューを更新</a>
@@ -71,10 +69,13 @@
       })
     },
     computed: {
+      render_review_star() {
+        return Array(this.loan.book_review.star).fill('★').join('')
+      },
       render_review_comment() {
         if (!this.loan.book_review) return ''
         return this.loan.book_review.comment.replace(/\n/g, "<br>")
-      }
+      },
     }
   }
 </script>
