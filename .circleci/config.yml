@@ -6,6 +6,7 @@ jobs:
     docker:
       - image: circleci/ruby:2.6.4-node-browsers
         environment:
+          TZ: Asia/Tokyo
           DATABASE_URL: postgres://root@localhost/liblog_test
       - image: circleci/postgres
         environment:
