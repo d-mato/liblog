@@ -9,7 +9,7 @@
     "moment": "^2.24.0",
     "popper.js": "^1.16.0",
     "postcss-cssnext": "^3.1.0",
-    "rails-ujs": "^5.2.2-1",
+    "rails-ujs": "^5.2.4",
     "vue": "^2.6.10",
     "vue-full-calendar": "^2.5.4",
     "vue-loader": "^15.7.2",
