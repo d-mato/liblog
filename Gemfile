@@ -9,7 +9,7 @@ end
 gem 'rails', '~> 6.0.2'
 gem 'puma', '~> 4.3'
 gem 'uglifier', '>= 1.3.0'
-gem 'jbuilder', '~> 2.9'
+gem 'jbuilder', '~> 2.10'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
