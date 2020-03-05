@@ -174,7 +174,7 @@ GEM
     pry-rails (0.3.9)
       pry (>= 0.10.4)
     public_suffix (3.0.3)
-    puma (4.3.2)
+    puma (4.3.3)
       nio4r (~> 2.0)
     rack (2.0.8)
     rack-proxy (0.6.5)
@@ -217,7 +217,7 @@ GEM
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
-    ridgepole (0.8.6)
+    ridgepole (0.8.7)
       activerecord (>= 5.0.1, < 6.1)
       diffy
     rspec-core (3.9.0)
@@ -288,7 +288,7 @@ GEM
     websocket-extensions (0.1.4)
     whenever (1.0.0)
       chronic (>= 0.6.3)
-    zeitwerk (2.2.2)
+    zeitwerk (2.3.0)
 
 PLATFORMS
   ruby
