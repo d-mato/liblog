@@ -2,10 +2,10 @@ module Crawler
   class ChuoCrawler < AbstractCrawler
     def login
       client.get 'https://www.library.city.chuo.tokyo.jp/login'
-      form = client.page.form_with(id: 'inputForm49')
+      form = client.page.form_with(id: 'idb')
       form.field_with!(name: 'textUserId').value = @account[:id]
       form.field_with!(name: 'textPassword').value = @account[:password]
-      client.click form.button_with!(value: '入力終了')
+      client.click form.button_with!(value: 'ログイン')
 
       return true if doc.text.include? "#{@account[:id]}さんのマイライブラリ"
 
