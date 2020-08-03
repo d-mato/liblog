@@ -104,7 +104,7 @@ GEM
     domain_name (0.5.20180417)
       unf (>= 0.0.5, < 1.0.0)
     erubi (1.9.0)
-    exception_notification (4.4.0)
+    exception_notification (4.4.3)
       actionmailer (>= 4.0, < 7)
       activesupport (>= 4.0, < 7)
     execjs (2.7.0)
