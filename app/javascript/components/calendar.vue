@@ -1,20 +1,22 @@
-import Vue from 'vue/dist/vue.esm'
+<template>
+  <full-calendar :events="events" :config="config" default-view="month" />
+</template>
+
+<script>
+import Vue from 'vue'
 import FullCalendar from 'vue-full-calendar'
 import 'fullcalendar/dist/fullcalendar.min.css'
 import $ from 'jquery'
 Vue.use(FullCalendar)
 
-const App = {
-  el: '#app',
-  data: {
-    events: [],
-    config: {
-      eventClick (event) {
-        console.log(event)
-      }
+export default {
+  data() {
+    return {
+      config: {},
+      events: []
     }
   },
-  created () {
+  mounted() {
     $.get('/loans.json').then(loans => {
       loans.forEach(loan => {
         // 返却日をイベント登録
@@ -26,12 +28,8 @@ const App = {
           color: loan.returned ? 'grey' : 'red',
           textColor: 'white'
         })
-
       })
     })
   }
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-  new Vue(App)
-})
+</script>
