@@ -4,7 +4,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: ruby:2.6.4
+      image: ruby:2.7.2
       env:
         TZ: Asia/Tokyo
         DATABASE_URL: postgres://postgres:postgres@postgres/liblog_test
