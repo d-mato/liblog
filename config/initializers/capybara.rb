@@ -1,4 +1,4 @@
-Capybara.register_driver :chrome do |app|
+Capybara.register_driver :selenium_chrome_headless do |app|
   chrome_path = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
   ::Selenium::WebDriver::Chrome.path = chrome_path if chrome_path
 
