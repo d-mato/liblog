@@ -31,6 +31,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'pg'
 
 gem 'active_decorator'
+gem 'capybara'
 gem 'devise'
 gem 'devise-i18n'
 gem 'exception_notification'
@@ -38,8 +39,10 @@ gem 'mechanize'
 gem 'webrick' # mechanizeが依存しているがRuby3から削除されたので追加する
 gem 'pry-rails'
 gem 'rails-i18n'
+gem 'rexml' # webdriversが依存しているがRuby3から削除されたので追加する
 gem 'ridgepole', '~> 0.9.0.beta'
 gem 'slim-rails'
+gem 'webdrivers'
 gem 'webpacker'
 gem 'whenever', require: false
 
