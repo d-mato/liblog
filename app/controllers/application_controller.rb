@@ -1,9 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!, only: %i[endpoint]
 
-  def endpoint
-  end
-
   private
 
   def authenticate_admin_user!
