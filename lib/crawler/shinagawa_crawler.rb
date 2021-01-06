@@ -23,10 +23,10 @@ module Crawler
         next if tr.xpath('td[6]').blank?
 
         loan = {
-          started_at: tr.xpath('td[6]').text.strip,
+          started_at: tr.xpath('td[7]').text.strip,
           book_title: tr.xpath('td[3]').text.strip,
-          place_name: tr.xpath('td[5]').text.strip,
-          ended_at: tr.xpath('td[7]').text.strip
+          place_name: tr.xpath('td[6]').text.strip,
+          ended_at: tr.xpath('td[8]').text.strip
         }
 
         detail_url = tr.at('td[3]/a')[:href]
