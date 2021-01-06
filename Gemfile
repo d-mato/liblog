@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '3.0.0'
+ruby '3.0.0' # herokuはここを見てRubyのバージョンを特定するので指定する
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -35,6 +35,7 @@ gem 'devise'
 gem 'devise-i18n'
 gem 'exception_notification'
 gem 'mechanize'
+gem 'webrick' # mechanizeが依存しているがRuby3から削除されたので追加する
 gem 'pry-rails'
 gem 'rails-i18n'
 gem 'ridgepole', '~> 0.9.0.beta'
