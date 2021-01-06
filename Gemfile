@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '~> 6.0.3'
+gem 'rails', '~> 6.1'
 gem 'puma', '~> 4.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'jbuilder', '~> 2.10'
@@ -37,7 +37,7 @@ gem 'exception_notification'
 gem 'mechanize'
 gem 'pry-rails'
 gem 'rails-i18n'
-gem 'ridgepole'
+gem 'ridgepole', '~> 0.9.0.beta'
 gem 'slim-rails'
 gem 'webpacker'
 gem 'whenever', require: false
