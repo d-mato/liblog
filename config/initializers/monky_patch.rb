@@ -1,5 +1,5 @@
 module ExtendedStrip
-  def strip
+  def deep_strip
     gsub(/^[　\s]*(.*?)[　\s]*$/, '\1')
   end
 end
