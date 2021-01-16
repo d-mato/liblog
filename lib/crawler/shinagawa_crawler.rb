@@ -10,6 +10,7 @@ module Crawler
       session.fill_in 'userpasswd', with: @account[:password]
       session.click_button 'Login'
 
+      session.visit 'https://www.shinagawa-lib.jp/opw/OPW/OPWUSERINFO.CSP'
       doc = Nokogiri.parse(session.html)
 
       return true if doc.text.include? "利用券カード:#{@account[:id]}"
@@ -24,27 +25,27 @@ module Crawler
 
     def fetch_loans
       loans = []
-      client.get 'https://www.shinagawa-lib.jp/opw/OPW/OPWUSERINFO.CSP'
-      doc.xpath('//*[@id="ContentLend"]/form/div[2]/table/tr').each do |tr|
-        next if tr.xpath('td[6]').blank?
+      session.visit 'https://www.shinagawa-lib.jp/opw/OPW/OPWUSERINFO.CSP'
+      session.all(:xpath, '//*[@id="ContentLend"]/form/div[2]/table/tbody/tr').each do |tr|
+        next if tr.all('td').size < 3 || tr.first(:xpath, 'td[3]').blank?
 
         loan = {
-          started_at: tr.xpath('td[7]').text.deep_strip,
-          book_title: tr.xpath('td[3]').text.deep_strip,
-          place_name: tr.xpath('td[6]').text.deep_strip,
-          ended_at: tr.xpath('td[8]').text.deep_strip
+          started_at: tr.first(:xpath, 'td[7]').text.deep_strip,
+          book_title: tr.first(:xpath, 'td[3]').text.deep_strip,
+          place_name: tr.first(:xpath, 'td[6]').text.deep_strip,
+          ended_at: tr.first(:xpath, 'td[8]').text.deep_strip
         }
 
-        detail_url = tr.at('td[3]/a')[:href]
-        client.get(detail_url)
-        sleep 3 # getしてから3秒待つ
-
-        client.page.parser.css('tr').each do |tr|
-          case tr.at('th')&.text
-          when '著者'
-            loan[:author] = tr.at('td[2]').text.deep_strip
-          when 'ISBN'
-            loan[:isbn] = tr.at('td[2]').text.deep_strip
+        p detail_url = tr.find(:xpath, 'td[3]/a')[:href]
+        session.within_window session.open_new_window do |sub_session|
+          session.visit detail_url
+          session.all('tr').each do |tr|
+            case tr.all('th').first&.text
+            when '著者'
+              loan[:author] = tr.first('td').text.deep_strip
+            when 'ISBN'
+              loan[:isbn] = tr.first('td').text.deep_strip
+            end
           end
         end
 
