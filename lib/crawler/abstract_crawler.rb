@@ -17,6 +17,9 @@ module Crawler
       raise NotImplementedError
     end
 
+    def quit
+    end
+
     private
 
     def client

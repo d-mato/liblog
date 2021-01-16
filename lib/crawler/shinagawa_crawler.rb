@@ -18,6 +18,10 @@ module Crawler
       raise CannotLogInError, error
     end
 
+    def quit
+      session.quit
+    end
+
     def fetch_loans
       loans = []
       client.get 'https://www.shinagawa-lib.jp/opw/OPW/OPWUSERINFO.CSP'

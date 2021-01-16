@@ -23,5 +23,10 @@ class CrawlerJob < ApplicationJob
         loan.save!
       end
     end
+
+  rescue => e
+    ExceptionNotifier.notify_exception(e)
+  ensure
+    crawler.quit
   end
 end
