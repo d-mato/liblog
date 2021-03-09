@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :loans, only: %i(index show) do
     post :extend_loan, on: :member
     patch :set_returned, on: :member
-    resource :extension, only: %i[create]
+    resource :extension, controller: 'loans/extensions', only: %i[create]
     resource :book_review, only: %i(create update)
   end
   resources :library_users, except: %i(show) do
