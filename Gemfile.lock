@@ -234,8 +234,8 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     rexml (3.2.4)
-    ridgepole (0.9.0.beta)
-      activerecord (>= 5.1, < 6.2)
+    ridgepole (1.0.1)
+      activerecord (>= 5.1, < 7.1)
       diffy
     rspec-core (3.9.3)
       rspec-support (~> 3.9.3)
@@ -343,7 +343,7 @@ DEPENDENCIES
   rails (~> 6.1)
   rails-i18n
   rexml
-  ridgepole (~> 0.9.0.beta)
+  ridgepole
   rspec-rails
   rspec_junit_formatter
   slack-notifier

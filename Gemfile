@@ -38,7 +38,7 @@ gem 'webrick' # mechanizeが依存しているがRuby3から削除されたの�
 gem 'pry-rails'
 gem 'rails-i18n'
 gem 'rexml' # webdriversが依存しているがRuby3から削除されたので追加する
-gem 'ridgepole', '~> 0.9.0.beta'
+gem 'ridgepole'
 gem 'slack-notifier'
 gem 'slim-rails'
 gem 'webdrivers'
