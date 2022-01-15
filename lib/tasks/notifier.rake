@@ -13,7 +13,7 @@ namespace :notifier do
           attachments: loans.map { |loan|
             {
               title: "#{loan.book_title} @#{loan.library.name}",
-              text: "返却日 #{loan.ended_at.strftime('%-m月%-d日')}"
+              text: "貸出日 #{loan.started_at.strftime('%-m月%-d日')}\n返却日 #{loan.ended_at.strftime('%-m月%-d日')}"
             }
           }
         )
