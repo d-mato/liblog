@@ -7,7 +7,16 @@ namespace :notifier do
       loans = user.loans.where(returned: false, ended_at: target_date)
 
       if loans.present?
-        NotificationMailer.return_date(user: user, loans: loans).deliver_now
+        notifier = Slack::Notifier.new(Rails.application.credentials.slack[:webhook_url])
+        notifier.post(
+          text: '返却日が近い本をお知らせします',
+          attachments: loans.map { |loan|
+            {
+              title: "#{loan.book_title} @#{loan.library.name}",
+              text: "返却日 #{loan.ended_at.strftime('%-m月%-d日')}"
+            }
+          }
+        )
       end
     end
   end
