@@ -13,7 +13,7 @@ module Crawler
       session.visit 'https://www.shinagawa-lib.jp/opw/OPW/OPWUSERINFO.CSP'
       doc = Nokogiri.parse(session.html)
 
-      return true if doc.text.include? "利用券カード:#{@account[:id]}"
+      return true if doc.text.include? 'ログインしています'
 
       error = doc.at('//dl/dd/font/strong')&.text&.deep_strip
       raise CannotLogInError, error
