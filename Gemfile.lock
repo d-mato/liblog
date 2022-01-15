@@ -72,6 +72,10 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     airbrussh (1.4.0)
       sshkit (>= 1.6.1, != 1.7.0)
+    better_errors (2.9.1)
+      coderay (>= 1.0.0)
+      erubi (>= 1.0.0)
+      rack (>= 0.9.0)
     bindex (0.8.1)
     bootsnap (1.4.8)
       msgpack (~> 1.0)
@@ -320,6 +324,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_decorator
+  better_errors
   bootsnap (>= 1.1.0)
   byebug
   capistrano-rails
