@@ -30,8 +30,6 @@ gem 'pg'
 
 gem 'active_decorator'
 gem 'capybara'
-gem 'devise'
-gem 'devise-i18n'
 gem 'exception_notification'
 gem 'mechanize'
 gem 'webrick' # mechanizeが依存しているがRuby3から削除されたので追加する
