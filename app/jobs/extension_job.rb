@@ -2,7 +2,7 @@ class ExtensionJob < ApplicationJob
   queue_as :default
 
   def perform(loan)
-    notifier = Slack::Notifier.new(Rails.application.credentials.slack[:webhook_url])
+    notifier = Slack::Notifier.new(Rails.application.credentials.dig(:slack, :webhook_url))
     library_user = loan.user.library_users.find_by!(library: loan.library)
     crawler = loan.library.crawler.constantize.new(id: library_user.sign_in_id, password: library_user.password)
     crawler.login

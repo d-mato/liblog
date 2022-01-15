@@ -7,7 +7,7 @@ namespace :notifier do
       loans = user.loans.where(returned: false, ended_at: target_date)
 
       if loans.present?
-        notifier = Slack::Notifier.new(Rails.application.credentials.slack[:webhook_url])
+        notifier = Slack::Notifier.new(Rails.application.credentials.dig(:slack, :webhook_url))
         notifier.post(
           text: '返却日が近い本をお知らせします',
           attachments: loans.map { |loan|
