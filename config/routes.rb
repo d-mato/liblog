@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
+  get 'sign_in' => 'sessions#new'
+  post 'sign_in' => 'sessions#create'
+
   get 'calendar' => 'loans#calendar'
   resources :loans, only: %i(index show) do
     post :extend_loan, on: :member

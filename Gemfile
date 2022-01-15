@@ -30,6 +30,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'pg'
 
 gem 'active_decorator'
+gem 'bcrypt'
 gem 'capybara'
 gem 'exception_notification'
 gem 'mechanize'

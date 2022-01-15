@@ -1,0 +1,13 @@
+.m-3
+  = form_with url: sign_in_path, local: true, html: { style: 'max-width: 300px', class: 'm-auto' } do |f|
+    h3 ログイン
+    - if @error_message
+      .alert.alert-danger = @error_message
+    .form-group
+      = f.label :email, 'メールアドレス'
+      = f.email_field :email, value: @email, required: true, class: 'form-control'
+    .form-group
+      = f.label :password, 'パスワード'
+      = f.password_field :password, required: true, class: 'form-control'
+    .form-group
+      = f.submit 'ログイン', class: 'btn btn-primary'
