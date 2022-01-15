@@ -19,9 +19,9 @@
             span[data-toggle="tooltip" title=(library_user.password)] ******
           td
             - if library_user.active?
-              = link_to '連携を解除する', [:activate, library_user], data: { confirm: '連携を解除すると貸出情報が同期されなくなります。よろしいですか？' }, method: :delete
+              = link_to '連携を解除する', library_user_activation_path(library_user), method: :delete, data: { confirm: '連携を解除すると貸出情報が同期されなくなります。よろしいですか？' }, method: :delete
             - else
-              = link_to '連携する', [:activate, library_user], method: :patch
+              = link_to '連携する', library_user_activation_path(library_user), method: :post
           td
             - unless library_user.active?
               = link_to '削除', library_user, data: { confirm: '削除してもよろしいですか？' }, method: :delete, class: 'btn btn-danger btn-sm'
@@ -34,7 +34,7 @@
         div パスワード: #{library_user.password}
 
         - if library_user.active?
-          div = link_to '連携を解除する', [:activate, library_user], data: { confirm: '連携を解除すると貸出情報が同期されなくなります。よろしいですか？' }, method: :delete
+          div = link_to '連携を解除する', library_user_activation_path(library_user), method: :delete, data: { confirm: '連携を解除すると貸出情報が同期されなくなります。よろしいですか？' }, method: :delete
         - else
-          div = link_to '連携する', [:activate, library_user], method: :patch
+          div = link_to '連携する', library_user_activation_path(library_user), method: :post
           .float-right = link_to '削除', library_user, data: { confirm: '削除してもよろしいですか？' }, method: :delete, class: 'btn btn-danger btn-sm'

@@ -8,10 +8,7 @@ Rails.application.routes.draw do
     resource :book_review, only: %i(create update)
   end
   resources :library_users, except: %i(show) do
-    member do
-      patch :activate
-      delete :activate
-    end
+    resource :activation, only: %i[create destroy], controller: 'library_users/activations'
   end
 
   root 'loans#index'

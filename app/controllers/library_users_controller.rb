@@ -36,16 +36,6 @@ class LibraryUsersController < ApplicationController
     redirect_to library_users_url
   end
 
-  def activate
-    if request.patch?
-      @library_user.update!(active: true)
-    elsif request.delete?
-      @library_user.update!(active: false)
-    end
-
-    redirect_to library_users_url
-  end
-
   private
 
   def set_library_user
@@ -53,6 +43,6 @@ class LibraryUsersController < ApplicationController
   end
 
   def library_user_params
-    params.require(:library_user).permit(%i(library_id sign_in_id password active))
+    params.require(:library_user).permit(%i(library_id sign_in_id password))
   end
 end
