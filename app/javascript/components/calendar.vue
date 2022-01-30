@@ -1,35 +1,40 @@
 <template>
-  <full-calendar :events="events" :config="config" default-view="month" />
+  <full-calendar :options="calendarOptions" />
 </template>
 
 <script>
-import Vue from 'vue'
-import FullCalendar from 'vue-full-calendar'
-import 'fullcalendar/dist/fullcalendar.min.css'
-import $ from 'jquery'
-Vue.use(FullCalendar)
+import FullCalendar from '@fullcalendar/vue'
+import dayGridPlugin from '@fullcalendar/daygrid'
 
 export default {
+  components: {
+    FullCalendar
+  },
   data() {
     return {
-      config: {},
-      events: []
+      calendarOptions: {
+        plugins: [dayGridPlugin],
+        initialView: 'dayGridMonth',
+        events: []
+      }
     }
   },
   mounted() {
-    $.get('/loans.json').then(loans => {
-      loans.forEach(loan => {
-        // 返却日をイベント登録
-        this.events.push({
-          title: loan.book_title,
-          url: `/loans/${loan.id}`,
-          start: loan.ended_at,
-          allDay: true,
-          color: loan.returned ? 'grey' : 'red',
-          textColor: 'white'
+    fetch('/loans.json')
+      .then(res => res.json())
+      .then(loans => {
+        loans.forEach(loan => {
+          // 返却日をイベント登録
+          this.calendarOptions.events.push({
+            title: loan.book_title,
+            url: `/loans/${loan.id}`,
+            start: loan.ended_at,
+            allDay: true,
+            color: loan.returned ? 'grey' : 'red',
+            textColor: 'white'
+          })
         })
       })
-    })
   }
 }
 </script>
