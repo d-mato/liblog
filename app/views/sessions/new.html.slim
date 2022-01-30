@@ -3,11 +3,11 @@
     h3 ログイン
     - if @session.errors.present?
       .alert.alert-danger = @session.errors.full_messages.join(',')
-    .form-group
+    .mb-3
       = f.label :email, 'メールアドレス'
       = f.email_field :email, required: true, class: 'form-control'
-    .form-group
+    .mb-3
       = f.label :password, 'パスワード'
       = f.password_field :password, required: true, class: 'form-control'
-    .form-group
+    .mb-3
       = f.submit 'ログイン', class: 'btn btn-primary'

@@ -3,16 +3,16 @@
     .modal-content
       .modal-body
         = form_with model: (loan.book_review || BookReview.new), url: loan_book_review_path(loan), local: true do |f|
-          .form-group
+          .mb-3
             = f.label :comment
             = f.text_area :comment, class: 'form-control'
           .d-inline
-            .form-group.d-inline
+            .mb-3.d-inline
               = f.label :star
-              .d-inline-block.ml-2
+              .d-inline-block.ms-2
                 = f.select :star, %w(1 2 3 4 5), { include_blank: true }, class: 'form-control d-inline-block', style: 'width: 5rem;'
 
-            .d-inline-block.ml-2
+            .d-inline-block.ms-2
               = f.submit '更新', class: 'btn btn-sm btn-primary'
-            .d-inline-block.ml-2
-              button.btn.btn-sm.btn-secondary data-dismiss='modal' type='button'  閉じる
+            .d-inline-block.ms-2
+              button.btn.btn-sm.btn-secondary data-bs-dismiss='modal' type='button'  閉じる

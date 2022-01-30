@@ -10,30 +10,29 @@ html
     link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"
   body
     nav.navbar.navbar-expand-lg.navbar-light.bg-light
-      a.navbar-brand href="/"  Liblog
-      button.navbar-toggler aria-controls="navbarSupportedContent" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarSupportedContent" data-toggle="collapse" type="button"
-        span.navbar-toggler-icon
-
-      #navbarSupportedContent.collapse.navbar-collapse
-        ul.navbar-nav.mr-auto
-          li.nav-item class=('active' if controller_name == 'loans' && action_name.in?(%w[index show]))
-            = link_to loans_path, class: 'nav-link' do
-              i class="fas fa-book-open mr-1"
-              | Loans
-          li.nav-item class=('active' if controller_name == 'loans' && action_name == 'calendar')
-            = link_to calendar_path, class: 'nav-link' do
-              i class="far fa-calendar-alt mr-1"
-              | Calendar
-          li.nav-item class=('active' if controller_name == 'library_users')
-            = link_to library_users_path, class: 'nav-link' do
-              i class="fas fa-user mr-1"
-              | Account
-
-        form.form-inline.my-2.my-lg-0 action="/loans"
-          input.form-control.mr-sm-2 aria-label="Search" placeholder="Search" type="search" name="q" value=@q
-          button.btn.btn-outline-success.my-2.my-sm-0 type="submit"  Search
-
-    nav = yield(:breadcrumb)
+      .container-fluid
+        a.navbar-brand href="/"  Liblog
+        button.navbar-toggler aria-controls="navbarSupportedContent" aria-expanded="false" aria-label=("Toggle navigation") data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button"
+          span.navbar-toggler-icon
+        #navbarSupportedContent.collapse.navbar-collapse
+          ul.navbar-nav.me-auto
+            li.nav-item class=('active' if controller_name == 'loans' && action_name.in?(%w[index show]))
+              = link_to loans_path, class: 'nav-link' do
+                i class="fas fa-book-open me-1"
+                | Loans
+            li.nav-item class=('active' if controller_name == 'loans' && action_name == 'calendar')
+              = link_to calendar_path, class: 'nav-link' do
+                i class="far fa-calendar-alt me-1"
+                | Calendar
+            li.nav-item class=('active' if controller_name == 'library_users')
+              = link_to library_users_path, class: 'nav-link' do
+                i class="fas fa-user me-1"
+                | Account
+          form.d-flex.my-2.my-lg-0 action="/loans"
+            .input-group
+              input.form-control placeholder="Search" name="q" value=@q
+              button.btn.btn-outline-success type="submit"  Search
+    nav.p-2 = yield(:breadcrumb)
 
     .container-fluid
       - if notice

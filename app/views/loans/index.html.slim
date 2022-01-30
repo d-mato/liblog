@@ -1,14 +1,14 @@
 .py-4
   .list-group
     - @loans.each do |loan|
-      = link_to loan, class: 'list-group-item text-decoration-none', style: loan.returned? ? '' : 'background: aliceblue;' do
+      = link_to loan, class: 'list-group-item text-primary', style: loan.returned? ? '' : 'background: aliceblue;' do
         .d-flex.align-items-center
           - if loan.book_review
-            i class="far fa-comment-alt mr-1" data-toggle="tooltip" title="レビューあり"
-          .font-weight-bold = loan.book_title
-        .text-right.small
+            i class="far fa-comment-alt me-1" data-bs-toggle="tooltip" title="レビューあり"
+          .fw-bold = loan.book_title
+        .text-end.small
           - if loan.returned?
-            .badge.badge-secondary 返却済
+            .badge.bg-secondary 返却済
           - else
-            .badge.badge-info 返却日 #{simple_date(loan.ended_at)}
-          .d-inline.ml-1.text-muted.label = loan.library.name
+            .badge.bg-info 返却日 #{simple_date(loan.ended_at)}
+          .d-inline.ms-1.text-muted.label = loan.library.name

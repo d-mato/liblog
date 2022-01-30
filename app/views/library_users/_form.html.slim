@@ -7,16 +7,16 @@
           - @library_user.errors.full_messages.each do |message|
             li = message
 
-    .form-group
+    .mb-3
       = f.collection_select :library_id, Library.all, :id, :name, {}, class: 'form-control'
 
-    .form-group
+    .mb-3
       = f.label :sign_in_id
       = f.text_field :sign_in_id, class: 'form-control'
 
-    .form-group
+    .mb-3
       = f.label :password
       = f.text_field :password, class: 'form-control'
 
-    .form-group
+    .mb-3
       = f.submit '設定', class: 'btn btn-primary'
