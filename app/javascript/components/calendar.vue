@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import FullCalendar from '@fullcalendar/vue'
+import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 
 export default {
