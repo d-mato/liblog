@@ -1,13 +1,9 @@
-import jQuery from 'jquery'
 import Rails from 'rails-ujs'
 import '../libs/bootstrap'
 import '../stylesheets/application.scss'
 
 import Vue from 'vue'
 import Calendar from 'components/calendar.vue'
-
-window.$ = jQuery
-window.jQuery = jQuery
 
 Rails.start()
 
@@ -17,5 +13,15 @@ document.addEventListener('DOMContentLoaded', () => {
       el,
       render: h => h(Calendar)
     })
+  })
+
+  // auto-rezie textarea
+  const autoResize = function(e) {
+    e.target.style.height = 'auto'
+    e.target.style.height = `${e.target.scrollHeight}px`
+  }
+  document.querySelectorAll('textarea').forEach(textarea => {
+    textarea.addEventListener('input', autoResize)
+    textarea.addEventListener('focus', autoResize)
   })
 })
