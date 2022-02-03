@@ -56,7 +56,7 @@ module Crawler
 
     def extend_loan(book_title)
       session.visit 'https://www.shinagawa-lib.jp/opw/OPW/OPWUSERINFO.CSP'
-      tr = session.all('#ContentLend .container > table tr').find { |tr| tr.all('td')[2]&.text&.deep_strip == book_title }
+      tr = session.all(:xpath, '//*[@id="ContentLend"]/form/div[2]/table/tbody/tr').find { |tr| tr.all('td')[2]&.text&.deep_strip == book_title }
       raise StandardError, '対象の本が見つかりません' unless tr
 
       tr.first('button[value="貸出延長"]').click
