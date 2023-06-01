@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    logging:
+      options:
+        max-file: 1
+
+volumes:
+  db-data:
